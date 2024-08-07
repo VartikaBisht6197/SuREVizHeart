@@ -10,9 +10,10 @@ output$plotTab1 <- renderPlotly({
 })
 
 # Output bigwigs
-output$plotTab2 <- renderPlot({
-  bigwig.plot
-},  res = 100)
+# Bigwigs Quite big
+# output$plotTab2 <- renderPlot({
+#   bigwig.plot
+# },  res = 100)
 
 
 output$plotTab3 <- renderPlot({
