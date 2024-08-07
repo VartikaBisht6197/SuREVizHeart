@@ -58,14 +58,13 @@ gene.expression.plots = get.expression.plot(genes)
 # Bigwig plot #
 ###############
 
-# Bigwigs Quite big
-# source(file.path(plotDIR, "bigwigplot.R"))
-# bigwig.plot <- wrap_plots(static.snp.plot,
-#     gene.plot,
-#     plot.bigwigs(chr, pos1, pos2, pos, bigwigs, "#00aeffb3", "common"),
-#     plot.bigwigs(chr, pos1, pos2, pos, AC16ATACbw, "#645200", "common"),
-#     ncol = 1, heights = c(0.2, 0.1, 0.7, 0.1) 
-# )
+source(file.path(plotDIR, "bigwigplot.R"))
+bigwig.plot <- wrap_plots(static.snp.plot,
+    gene.plot,
+    plot.bigwigs(chr, pos1, pos2, pos, bigwigs, "#00aeffb3", "common"),
+    plot.bigwigs(chr, pos1, pos2, pos, AC16ATACbw, "#645200", "common"),
+    ncol = 1, heights = c(0.2, 0.1, 0.7, 0.1) 
+)
 
 
 ############################
@@ -168,12 +167,12 @@ output$downloadData <- downloadHandler(
             csv_path <- file.path(temp_dir, "SNP_info.csv")
             write.csv(SNP.info, csv_path, row.names = FALSE)
         }
-        # Bigwigs Quite big
+
         # Save each GRanges object as a BEDGraph file
-        # lapply(names(granges_list), function(gr_name) {
-        #     gr_path <- file.path(temp_dir, paste0(gr_name, ".bedGraph"))
-        #     export(granges_list[[gr_name]], con = gr_path, format = "bedGraph")
-        # })
+        lapply(names(granges_list), function(gr_name) {
+            gr_path <- file.path(temp_dir, paste0(gr_name, ".bedGraph"))
+            export(granges_list[[gr_name]], con = gr_path, format = "bedGraph")
+        })
 
         # Save Jaspar info if available
         if (!is.null(jaspar.data)) {
