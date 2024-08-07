@@ -3,3 +3,6 @@
 .Rproj.user/
 ENV/
 DATABASE/
+._.DS_Store
+._Annogen.logo.png
+._DATABASE
