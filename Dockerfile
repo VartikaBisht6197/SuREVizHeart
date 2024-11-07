@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Start with the Miniconda3 image
 # Fast and small builds of conda-based environments in containers using micromamba.
 FROM mambaorg/micromamba:0.25.0
