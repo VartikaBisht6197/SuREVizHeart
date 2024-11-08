@@ -1,1 +1,1 @@
-R -e "shiny::runApp('SuREVizApp/app.R',port = 3838 , host ='0.0.0.0' )"
+R -e "shiny::runApp('app.R',port = 3838 , host ='0.0.0.0' )"
