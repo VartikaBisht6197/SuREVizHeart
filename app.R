@@ -9,8 +9,9 @@
 #-----------------------------------------------------------------------------------------------
 
 # Define directories for application and data
-appDIR <- "/HDD/data2/scratch/vartika/GitHub/SuREViz/SuREVizApp"
-dataDIR <- "/HDD/data2/scratch/vartika/projects/VB231127_SuRE_Viz_data_curation/SuREViz/data"
+library(here)
+appDIR <- here()
+dataDIR <- file.path(dirname(appDIR),"data")
 
 #---------------------------------------------------------------------------------------------
 # Initial Setup: Load necessary scripts for initializing values
@@ -128,6 +129,7 @@ server <- function(input, output, session) {
 
         # Reformat the search query as needed by the application
         source(file.path(appDIR, "main", "reformat.input.R"), local = TRUE )
+        assign("query_snps", query_snps , envir = .GlobalEnv)
 
         #-------------------------------------------------------------------------------------------
         # Conditional Processing Based on Alert Confirmation
