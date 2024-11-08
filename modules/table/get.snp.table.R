@@ -18,9 +18,9 @@ if( nrow(suredata) != 0 ){
   colnames(SNP.info) <- c("Chromosome", "Position in human hg38",
                           "Reference allele", "Alternate allele",
                           "rsID", "Population allele frequency gnomAD 3.1.2", 
-                          "Genotype in Patient 1", "Genotype in Patient 2",
-                          "Genotype in Patient 3", "Genotype in Patient 4", 
-                          "Genotype in Patient 5", "Alternate allele coverage", 
+                          "SuREX57", "SuREX59",
+                          "SuREX67", "SuREX68", 
+                          "SuREX86", "Alternate allele coverage", 
                           "Reference allele coverage", "Reference allele mean expression", 
                           "Alternate allele mean expression", "p-value", "Description")
   
