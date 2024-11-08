@@ -22,7 +22,6 @@ suppressPackageStartupMessages({
   library(ggseqlogo)
   library(GenomicRanges)
   library(gridExtra)
-  library(here)
   library(kableExtra)
   library(memes)
   library(optparse)
@@ -59,11 +58,12 @@ DBQueryScriptsDIR <- file.path(appDIR, "modules" ,"query")
 
 # Define lists of bigwig files for different patients
 bigwigs <- list(
-  "Patient1" = file.path(dataDIR, "data", "HLHS.X57.bw"),
-  "Patient2" = file.path(dataDIR, "data", "HLHS.X59.bw"),
-  "Patient3" = file.path(dataDIR, "data", "HLHS.X67.bw"),
-  "Patient4" = file.path(dataDIR, "data", "HLHS.X68.bw"),
-  "Patient5" = file.path(dataDIR, "data", "HLHS.X86.bw")
+  "SuREX57" = file.path(dataDIR, "data", "SuREX57.bw"),
+  "SuREX59" = file.path(dataDIR, "data", "SuREX59.bw"),
+  "SuREX67" = file.path(dataDIR, "data", "SuREX67.bw"),
+  "SuREX68" = file.path(dataDIR, "data", "SuREX68.bw"),
+  "SuREX86" = file.path(dataDIR, "data", "SuREX86.bw"),
+  "SuREX38" = file.path(dataDIR, "data", "SuREX38.bw")
 )
 
 # Define list of ATAC-seq data files
