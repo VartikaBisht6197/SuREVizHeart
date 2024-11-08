@@ -95,10 +95,14 @@ log.this.info("Gene Expression Plot : Plotted âœ…")
 source(file.path(appDIR, "modules", "plot", "bigwigplot.R"))
 
 # Combine various plots related to SNPs, genes, and BigWig data
+SuREbigwig <<- TRUE
+SuREbigwigplots <- plot.bigwigs(chr, pos1, pos2, pos, bigwigs, "#00aeffb3", "common")
+
+SuREbigwig <<- FALSE
 bigwig.plot <- wrap_plots(
     static.snp.plot,
     gene.plot,
-    plot.bigwigs(chr, pos1, pos2, pos, bigwigs, "#00aeffb3", "common"),
+    SuREbigwigplots,
     plot.bigwigs(chr, pos1, pos2, pos, AC16ATACbw, "#645200", "common"),
     ncol = 1, heights = c(0.2, 0.1, 0.7, 0.1)
 )
@@ -111,7 +115,7 @@ log.this.info("SuRE Bigwig Tracks : Plotted SuRE bigwig and AC16 ATACseq plot âœ
 
 # Source the script for BED plot generation
 source(file.path(appDIR, "modules", "plot", "bedplot.R"))
-
+SuREbigwig <<- FALSE
 # Initialize the plot for user-defined BigWig and BED files
 user.defined.plot <- NULL
 if (!is.null(user_defined_bw)) {

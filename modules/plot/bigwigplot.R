@@ -14,6 +14,13 @@
 #   bigwig.scale: The scaling method for the bigWig data
 plot.bigwigs = function(chr, pos1 , pos2 , pos , plot.bw, bwcolor, bigwig.scale){
 
+  if(!is.na(pos) && SuREbigwig == TRUE){
+    GTs = query_snps[7:11]
+    GTs = gsub(0, query_snps$REF, GTs)
+    GTs = gsub(1, query_snps$ALT, GTs)
+    names(plot.bw) = paste0(names(plot.bw),"\n","(", GTs, ")")
+  }
+
   bigwig.plot = BigwigTrack(
     region = GRanges(seqnames = chr, ranges = IRanges(start = pos1, end = pos2)),
     bigwig = plot.bw,
