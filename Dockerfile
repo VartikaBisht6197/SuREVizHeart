@@ -18,10 +18,10 @@ RUN micromamba create -n sureviz -c conda-forge -c bioconda \
 SHELL ["/bin/bash", "-c"]
 
 # Copy the rest of your Shiny app files
-COPY SuREViz /shiny-server/SuREViz
+COPY . /shiny-server/SuREViz           
 
 # Expose the Shiny app port
 EXPOSE 3838
 
 # Run the Shiny app with environment activation and list files with R
-CMD ["bash", "-c", "eval \"$(micromamba shell hook --shell=bash)\" && micromamba activate sureviz && R -e \"print('Listing files in /shiny-server/SuREViz'); print(list.files('/shiny-server/SuREViz', recursive = TRUE)); shiny::runApp('/shiny-server/SuREViz/app.R', host = '0.0.0.0', port = 3838)\""]
+CMD ["bash", "-c", "eval \"$(micromamba shell hook --shell=bash)\" && micromamba activate sureviz && shiny::runApp('/shiny-server/SuREViz/app.R', host = '0.0.0.0', port = 3838)"]
