@@ -8,3 +8,5 @@ DATABASE/
 ._DATABASE
 docker.login.credentials.md
 Dockerfile
+docker.run.bash
+._docker.run.bash
