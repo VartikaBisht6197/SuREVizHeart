@@ -1,3 +1,7 @@
 .DS_Store
 ._*
-
+docker.login.credentials.md
+run.cmd.bash
+.gitignore
+._app
+.vscode	
