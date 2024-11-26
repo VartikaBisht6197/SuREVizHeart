@@ -9,6 +9,7 @@
 # to ensure that the styles are applied correctly.
 #-----------------------------------------------------------------------------------------------
 
+# Custom CSS for enhancing UI appearance
 bodyStyles <- function() {
   tags$head(
     tags$style(HTML("
@@ -73,6 +74,50 @@ bodyStyles <- function() {
         background-color: #e9e9e9 !important;
         color: black !important;
       }
+
+      /* Custom Styles for File Input */
+      .file-input-label-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .file-input-label-row .btn {
+        flex: 1; /* Allow the Browse button to take up remaining space */
+      }
+      .selected-files {
+        margin-top: 15px;
+      }
+      .file-upload-container {
+        border: 2px dashed #64BEA5;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        cursor: pointer;
+        text-align: center;
+        margin-top: 30px;
+      }
+      .file-upload-container:hover {
+        background-color: #dff7ef;
+        border-color: #56a08e;
+      }
+      .file-upload-container input[type='file'] {
+        font-size: 1.1em;
+        color: #555;
+        font-weight: bold;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        text-align: center;
+      }
+      .file-upload-container .placeholder-text {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #777;
+      }
+      .row-spacing {
+          margin-top: 20px;
+          }
     "))
   )
 }
