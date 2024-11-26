@@ -8,6 +8,9 @@
 # and then launches the Shiny app.
 #-----------------------------------------------------------------------------------------------
 
+# Max upload 2GB
+options(shiny.maxRequestSize = 30 * 1024^2)
+
 # Define directories for application and data
 library(here)
 appDIR <- here()
@@ -24,26 +27,6 @@ source(file.path(appDIR, "global.R"), local = TRUE )
 # A variable to keep track of render state, ensuring that memory is cleared before each render.
 #-----------------------------------------------------------------------------------------------
 render_mem <- 0
-
-#-----------------------------------------------------------------------------------------------
-# Initialize Logging
-# Define a custom logger for DD-MM-YYY TIME COMMMENT format
-#-----------------------------------------------------------------------------------------------
-# Function to log messages with a timestamp
-log.this.info <- function(message) {
-    # Format the current time
-    timestamp <- format(Sys.time(), "%d-%m-%Y %H:%M:%S")
-    formatted_message <- sprintf("[%s] %s", timestamp, message)
-
-    # Append the formatted message to the log file
-    log.file <<- c(log.file, formatted_message)
-}
-# Initialize the log variable as an empty character vector
-log.file <- c()
-# Function to reset the log
-reset.log <- function() {
-    log.file <<- c()
-}
 
 # Source individual UI component scripts
 # Each of these scripts defines a part of the user interface for the Shiny application.
@@ -80,9 +63,9 @@ server <- function(input, output, session) {
     pos_value <- reactiveVal(NULL)
     variant_view <- reactiveVal(NULL)
     input_pass_test <- reactiveVal(FALSE)
+    user_defined_files <- reactiveValues(files = list())
 
-    # Log the start of the server
-    log.this.info("Server started")
+    message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Server started"))
 
     #---------------------------------------------------------------------------------------------
     # Reactive Value Initialization: Reset 'input_pass_test' at app start or when necessary
@@ -92,7 +75,7 @@ server <- function(input, output, session) {
         input_pass_test(FALSE) # Reset alert confirmation status
     })
 
-    log.this.info("Initial run: Programmatic button click on app start")
+    message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Initial run: Programmatic button click on app start"))
 
     #---------------------------------------------------------------------------------------------
     # Initial Run: Programmatic Button Click on App Start
@@ -115,17 +98,13 @@ server <- function(input, output, session) {
     # This observer handles the actions that should be taken when the 'runButton' is clicked.
     #---------------------------------------------------------------------------------------------
     observeEvent(input$runButton, {
-
-        # Reset the log for a new session or process
-        reset.log()
-
-        log.this.info("Observed render button")
+        message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Observed render button"))
 
         # Retrieve input values from the UI
         search_query <- input$search_query # Get search query input from the user
         flank <- to_number(input$flank) # Convert flank input to a numeric value
 
-        log.this.info(paste0("Observed search query : ", search_query, " flank : ", flank))
+        message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", paste0("Observed search query : ", search_query, " flank : ", flank)))
 
         # Reformat the search query as needed by the application
         source(file.path(appDIR, "main", "reformat.input.R"), local = TRUE )
@@ -136,7 +115,19 @@ server <- function(input, output, session) {
         # Only proceed with processing if the alert has been confirmed, i.e. test passed.
         #-------------------------------------------------------------------------------------------
         if (input_pass_test()) {
-            log.this.info("Input follows the guidlines. Processing underway. ✅")
+
+        message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Query SNP defined as :"))
+        print(query_snps)
+
+        # chekck user defined inputs
+        source(file.path(appDIR, "server", "check.user.input.R"), local = TRUE)
+
+        #-------------------------------------------------------------------------------------------
+        # Conditional Processing Based on Alert Confirmation
+        # Only proceed with processing if the alert has been confirmed, i.e. test passed.
+        #-------------------------------------------------------------------------------------------
+        if (input_pass_test()) {
+            message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Input follows the guidlines. Processing underway. ✅"))
             # Update reactive values based on input
             chr_value(chr) # Update chromosome value
             flank_value(flank) # Update flank value
@@ -145,10 +136,11 @@ server <- function(input, output, session) {
             # Source the script that handles the main processing and rendering of plots
             source(file.path(appDIR, "main", "render.process.R"), local = TRUE)
         } else {
-            log.this.info("Input does not follow the guidlines. Reasons must have been specified above. No processing done. ❌")
-            print("Alert not confirmed. Skipping further processing.") # Log message if alert not confirmed
-            # Source the script for handling the download of output data
-            source(file.path(appDIR, "main", "downloadData.R"), local = TRUE)
+            message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Input does not follow the guidlines. Reasons must have been specified above. No processing done. ❌"))
+            message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Alert not confirmed. Skipping further processing."))
+        }} else {
+            message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Input does not follow the guidlines. Reasons must have been specified above. No processing done. ❌"))
+            message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Alert not confirmed. Skipping further processing."))
         }
     })
 
@@ -207,16 +199,26 @@ server <- function(input, output, session) {
                     callbackR = function(x) {
                         # x contains the user's response (TRUE for Yes, FALSE for No)
                         if (x) {
-                            # Reset the log for a new session or process
-                            reset.log()
-                            # User confirmed to proceed with plotting
-                            log.this.info(paste0("Valid click. Captured search query : ", search_query, " flank : ", flank))
-                            # Reformat the search query as needed by the application
-                            source(file.path(appDIR, "main", "reformat.input.R"), local = TRUE)
-                            # Source the script that handles the main processing and rendering of plots
-                            source(file.path(appDIR, "main", "render.process.R"), local = TRUE)
+                            # Check if the new updated files are all valid
+                            source(file.path(appDIR, "server", "check.user.input.R"), local = TRUE)
+                            if (input_pass_test()) {
+                                # Update the textInput with the new search_query value
+                                updateTextInput(session, "search_query", value = search_query)
+                                # User confirmed to proceed with plotting
+                                message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", paste0("Valid click. Captured search query : ", search_query, " flank : ", flank)))
+                                # Reformat the search query as needed by the application
+                                source(file.path(appDIR, "main", "reformat.input.R"), local = TRUE)
+                                assign("query_snps", query_snps, envir = .GlobalEnv)
+                                message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Query SNP defined as :"))
+                                print(query_snps)
+                                # Source the script that handles the main processing and rendering of plots
+                                source(file.path(appDIR, "main", "render.process.R"), local = TRUE)
+                            } else {
+                                message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Input does not follow the guidlines. Reasons must have been specified above. No processing done. ❌"))
+                                message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Alert not confirmed. Skipping further processing."))
+                            }
                         } else {
-                            log.this.info("Invalid click. User selected 'No, Do not proceed with plotting'.")
+                            message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Invalid click. User selected 'No, Do not proceed with plotting'."))
                             # User opted not to proceed with the plotting
                             cat("User selected 'No, Do not proceed with plotting'.\n")
                             # Source the script for handling the download of output data
