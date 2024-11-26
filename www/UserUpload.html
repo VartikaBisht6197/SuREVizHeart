@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2 {
+            color: #2c3e50;
+        }
+
+        ul {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .source {
+            color: #2980b9;
+        }
+
+        .note {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-left: 5px solid #2980b9;
+        }
+
+        .alert {
+            color: #c0392b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>This tab provides an overview of the files uploaded by the user. The tool supports three input formats:
+        <strong>TSV</strong>, <strong>BED</strong>, and <strong>BigWig</strong>. Each file type is used for specific
+        purposes and must adhere to specific format requirements, as outlined below:
+    </p>
+
+    <ul>
+        <li><strong>TSV Files (MPRA Data):</strong>
+            These files must contain exactly 7 columns:
+            <ol>
+                <li><em>Chromosome</em>: The chromosome where the variant is located. Must start with "chr_".</li>
+                <li><em>Position</em>: The exact position of the variant (numeric).</li>
+                <li><em>Reference Allele</em>: The original allele at the position.</li>
+                <li><em>Alternate Allele</em>: The mutated allele at the position.</li>
+                <li><em>Reference Signal</em>: The MPRA signal for the reference allele.</li>
+                <li><em>Alternate Signal</em>: The MPRA signal for the alternate allele.</li>
+                <li><em>P-value</em>: The statistical significance of the variant in the MPRA data.</li>
+            </ol>
+            These values are used to generate rectangular visual markers for variants. The height of each rectangle is
+            determined by the reference and alternate signals, while the color indicates the allele with higher
+            expression. Opacity is influenced by the p-value, allowing significant variants to stand out more clearly.
+            These visualizations are consistent with the plots in the <em>Functional Impact Assessment</em> tab.
+
+            <p>When viewing a variant in the SuRE data, if an MPRA TSV file has been uploaded, the application
+                cross-checks whether the variant is also present in the uploaded MPRA data. If the variant is found, the
+                system highlights it with a yellow line segment, making it easy to spot its position in the uploaded
+                data. This highlighting behavior is consistent with the approach used in the <em>Functional Impact
+                    Assessment</em> tab.</p>
+        </li>
+        <li><strong>BigWig Files:</strong>
+            These binary files store genomic data and are processed using the <a
+                href="https://rdrr.io/bioc/rtracklayer/man/BigWigFile.html">rtracklayer</a>
+            package in R. A small portion of the file is read to ensure it is valid and accessible. If any issues are
+            encountered, an error message will be displayed.
+        </li>
+        <li><strong>BED Files:</strong>
+            These files must contain at least 3 columns with no header. The first three columns should include:
+            <ol>
+                <li>Chromosome</li>
+                <li>Start Position</li>
+                <li>End Position</li>
+            </ol>
+            BED files are primarily used for genomic region annotations.
+        </li>
+    </ul>
+
+    <div class="note">
+        <strong>Note:</strong> The maximum upload size for any file is <strong>30MB</strong>. Large uploads can impact
+        performance and make the application slow or unresponsive. To reduce the size of BigWig or BED files, you can
+        subset them:
+        <ul>
+            <li>To extract data for a specific chromosome, use a tool like <a
+                    href="https://samtools.github.io/bcftools/">bcftools</a> or
+                <a href="https://bedtools.readthedocs.io/">bedtools</a>.
+            </li>
+            <li>For BigWig files, use the <code>bigWigToBedGraph</code> utility to convert them to BedGraph, filter for
+                your region of interest, and then convert back to BigWig.</li>
+            <li>For BED files, extract rows containing the chromosome or region of interest using tools like
+                <code>bedtools</code> , <code>awk</code> or a text editor.
+            </li>
+        </ul>
+    </div>
+
+    <p class="alert">It is not advisable to upload more than 10 files at once. Viewing too many files can result in a
+        cluttered and difficult-to-read visualization.</p>
+
+</body>
+
+</html>
