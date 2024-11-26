@@ -12,7 +12,7 @@ RUN micromamba create -n sureviz -c conda-forge -c bioconda \
     r-patchwork r-pheatmap r-plotly r-rcolorbrewer r-rsqlite r-signac \
     r-shiny r-shinyfiles r-shinywidgets r-shinyalert r-shinycssloaders \
     r-shinydashboard r-shinyjs r-tidyr bioconductor-universalmotif r-zip \
-    bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-rtracklayer
+    bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-rtracklayer r-bslib
 
 # Initialize the micromamba shell for bash
 SHELL ["/bin/bash", "-c"]
