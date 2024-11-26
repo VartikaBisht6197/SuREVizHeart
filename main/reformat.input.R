@@ -48,7 +48,7 @@ if (length(query_parts[[1]]) == 2) {
   if(is.na(pos)){
 
     # Alert user for invalid input format
-    log.this.info("Invalid input format.Please provide input in one of the following formats: chr:pos, or gene. ❌")
+    message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Invalid input format.Please provide input in one of the following formats: chr:pos, or gene. ❌"))
     shinyalert(
       title = "Invalid input format",
       text = "Please provide input in one of the following formats: chr:pos, or gene."
@@ -67,7 +67,7 @@ if (length(query_parts[[1]]) == 2) {
 
     if (nrow(query_snps) == 0) {
       # Alert user if variant is not found in SuRE database
-      log.this.info("Variant not in SuRE Database ❌")
+      message( "Variant not in SuRE Database ❌")
       shinyalert(
         title = "Variant not in SuRE Database",
         type = "error",
@@ -91,7 +91,7 @@ if (length(query_parts[[1]]) == 2) {
 
   if (nrow(gene) == 0) {
     # Alert user if gene is not found
-    log.this.info("Either the search query is a single string but not a gene name or the gene specified is not defined in GENECODE GTF GRCh38.p14 Human Release 46 ❌")
+    message("Either the search query is a single string but not a gene name or the gene specified is not defined in GENECODE GTF GRCh38.p14 Human Release 46 ❌")
     shinyalert(
       type = "error",
       title = "Gene not found",
@@ -114,7 +114,7 @@ if (length(query_parts[[1]]) == 2) {
   }
 } else {
   # Alert user for invalid input format
-  log.this.info("Invalid input format.Please provide input in one of the following formats: chr:pos, or gene. ❌")
+  message( "Invalid input format.Please provide input in one of the following formats: chr:pos, or gene. ❌")
   shinyalert(
     title = "Invalid input format",
     text = "Please provide input in one of the following formats: chr:pos, or gene."
