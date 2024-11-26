@@ -32,8 +32,7 @@
 
 <body>
     <p>The search bar accommodates inputs in the format "chr:pos" for defining the variant of interest or by specifying
-        the gene name. The application queries functionally annotated data from five Hypoplastic Left Heart Syndrome
-        (HLHS) patients as outlined in the <a href="https://google.com">referenced paper</a>. Genes in the database
+        the gene name. The application queries functionally annotated data from six patients as outlined in the <a href="https://google.com">referenced paper</a>. Genes in the database
         adhere to the RefGene naming format, available for reference at <a
             href="https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/genes/hg38.ncbiRefSeq.gtf.gz">UCSC Genome
             Browser</a>.</p>
@@ -44,17 +43,24 @@
             region, as defined by the search box and flanking parameters. The top plot visualizes variants within the
             defined region. Each rectangle in the plot represents a variant, with the x-axis indicating the position in
             the genome and the y-axis representing the normalized expression in SuRE.</li>
-
+        
         <li>The bottom of the rectangle starts from the minimum expressing allele of the variant. For instance, at
-            position chr8:27797408 where the reference allele is G and A is the alternate allele, if G has a SuRE
-            expression of 6.26 and A has an expression of 0.43, then the rectangle will be positioned at chr8:27797408
-            on the x-axis. The bottom of the rectangle starts at 0.43 and extends up to 6.26, visually representing the
+            position <b>chr12:128797635</b> where the reference allele is T and C is the alternate allele, if T has a mean SuRE
+            expression of
+            <b>75.32</b> and C has a mean expression of <b>2.47</b>, then the rectangle will be positioned at chr12:128797635
+            on the x-axis. The bottom of the rectangle starts at <b>2.47</b> and extends up to <b>75.32</b>, visually
+            representing the
             impact of the variant. The opacity and thickness (along the x-axis) of the rectangle indicate the
-            significance of the variant.</li>
-
-        <li>The color of each rectangle indicates whether the maximum expressing allele for a variant is the reference
-            or alternate allele. This interactive visualization allows users to click on variants of interest to center
-            the plot around the selected variant.</li>
+            significance of the variant.
+        </li>
+        
+        <li>The color of each rectangle indicates whether the maximum expressing allele for a variant is the
+            <span style="color: #64BEA5; font-weight: bold;">reference allele</span> or
+            <span style="color: #3c5379; font-weight: bold;">alternate allele</span>.
+            This interactive visualization allows users to click on variants of interest to center the plot around the selected
+            variant.
+        </li>
+        
     </ul>
 </body>
 
