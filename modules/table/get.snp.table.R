@@ -18,14 +18,14 @@ if( nrow(suredata) != 0 ){
   colnames(SNP.info) <- c("Chromosome", "Position in human hg38",
                           "Reference allele", "Alternate allele",
                           "rsID", "Population allele frequency gnomAD 3.1.2", 
-                          "SuREX57", "SuREX59",
+                          "SuREX38","SuREX57", "SuREX59",
                           "SuREX67", "SuREX68", 
                           "SuREX86", "Alternate allele coverage", 
                           "Reference allele coverage", "Reference allele mean expression", 
                           "Alternate allele mean expression", "p-value", "Description")
   
-  log.this.info("SuRE Table : Functionally assessed variants in the region of interest printed in tabular format.  ✅")
+  message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "SuRE Table : Functionally assessed variants in the region of interest printed in tabular format.  ✅"))
 } else {
-   log.this.info("SuRE Table : No functionally assessed variants in the region of interest.")
+   message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "SuRE Table : No functionally assessed variants in the region of interest."))
 }
 
