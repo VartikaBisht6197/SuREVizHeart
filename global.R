@@ -13,6 +13,7 @@
 # These libraries provide various functionalities needed for data manipulation, visualization,
 # and user interface components in the Shiny app.
 suppressPackageStartupMessages({
+  library(bslib)
   library(BSgenome.Hsapiens.UCSC.hg38)
   library(data.table)
   library(DBI)

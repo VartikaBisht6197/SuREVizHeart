@@ -12,7 +12,46 @@
 # Custom CSS for enhancing UI appearance
 bodyStyles <- function() {
   tags$head(
+    tags$script(HTML("
+            function showConfetti() {
+                const confettiCount = 100; // Number of confetti pieces
+                const colors = ['#ff5733', '#33c9ff', '#ffcc33', '#ff66ff', '#33ff66']; // Confetti colors
+                for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.width = Math.random() * 10 + 'px'; // Random width for each piece
+                confetti.style.height = Math.random() * 10 + 'px'; // Random height for each piece
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // Random color
+                confetti.style.position = 'absolute';
+                confetti.style.left = Math.random() * window.innerWidth + 'px'; // Random starting position
+                confetti.style.top = -10 + 'px'; // Start just above the screen
+                document.body.appendChild(confetti);
+
+                // Animation for confetti fall
+                const fallDuration = Math.random() * 3 + 2 + 's'; // Random fall duration between 2 and 5 seconds
+                const fallDelay = Math.random() * 2 + 's'; // Random delay before falling
+                confetti.style.animation = `confettiFall ${fallDuration} linear ${fallDelay} infinite`;
+
+                setTimeout(() => document.body.removeChild(confetti), parseFloat(fallDuration) * 1000);
+                }
+            }
+        ")),
     tags$style(HTML("
+      @keyframes confettiFall {
+        0% { 
+          transform: translateY(-100vh) rotate(0deg);
+        }
+        100% { 
+          transform: translateY(100vh) rotate(720deg);
+        }
+      }
+
+      .confetti {
+        position: absolute;
+        opacity: 0.8;
+        border-radius: 50%;
+        animation-timing-function: ease-out;
+      }
       body {
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         background-color: #f9f9f9;

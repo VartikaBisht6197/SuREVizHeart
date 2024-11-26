@@ -65,6 +65,9 @@ server <- function(input, output, session) {
     input_pass_test <- reactiveVal(FALSE)
     user_defined_files <- reactiveValues(files = list())
 
+    # Trigger confetti animation after the button is clicked
+    shinyjs::runjs("showConfetti();")
+
     message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Server started"))
 
     #---------------------------------------------------------------------------------------------
@@ -98,6 +101,7 @@ server <- function(input, output, session) {
     # This observer handles the actions that should be taken when the 'runButton' is clicked.
     #---------------------------------------------------------------------------------------------
     observeEvent(input$runButton, {
+
         message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Observed render button"))
 
         # Retrieve input values from the UI
@@ -128,6 +132,9 @@ server <- function(input, output, session) {
         #-------------------------------------------------------------------------------------------
         if (input_pass_test()) {
             message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Input follows the guidlines. Processing underway. ✅"))
+            # Trigger the confetti effect
+            shinyjs::runjs("showConfetti();")
+
             # Update reactive values based on input
             chr_value(chr) # Update chromosome value
             flank_value(flank) # Update flank value
@@ -204,6 +211,8 @@ server <- function(input, output, session) {
                             if (input_pass_test()) {
                                 # Update the textInput with the new search_query value
                                 updateTextInput(session, "search_query", value = search_query)
+                                # Trigger the confetti effect
+                                shinyjs::runjs("showConfetti();")
                                 # User confirmed to proceed with plotting
                                 message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", paste0("Valid click. Captured search query : ", search_query, " flank : ", flank)))
                                 # Reformat the search query as needed by the application
