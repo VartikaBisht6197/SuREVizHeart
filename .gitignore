@@ -1,3 +1,4 @@
+.dockerignore
 *.Rhistory
 *.RData
 .Rproj.user/
