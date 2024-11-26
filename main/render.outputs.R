@@ -35,7 +35,7 @@
 # Render combined Plotly plot for SNP and gene visualizations
 output$plotTab1 <- renderPlotly({
   # Combine SNP plot and gene plotly into a subplot
-  p <- subplot(snp.plot, gene.plotly, nrows = 2, heights = c(0.8, 0.2), shareX = TRUE) %>%
+  p <- subplot(style(snp.plot,showlegend = F), style(gene.plotly,showlegend = F), nrows = 2, heights = c(0.8, 0.2), shareX = TRUE) %>%
     layout(xaxis = list(autorange = FALSE, range = c(pos1, pos2)))
   # Register the plotly_click event for interactivity
   event_register(p, "plotly_click")
@@ -54,7 +54,8 @@ output$plotTab3 <- renderPlot(
   {
     gene.expression.plots
   },
-  res = 100
+  res = 100,
+  width = 800
 )
 
 # Output user-defined BigWig plot
@@ -62,7 +63,8 @@ output$plotTab5 <- renderPlot(
   {
     user.defined.plot
   },
-  res = 100
+  res = 100,
+  height = 500 * user_define_plots
 )
 
 # Output JASPAR plot with adjustable dimensions
@@ -72,8 +74,7 @@ output$jasparplot <- renderPlot(
     jaspar_output$plot
   },
   res = 100,
-  height = motifvh * motifs,
-  width = 1000
+  height = 600 * motifs
 ) # Adjust height and width as needed
 
 # Output FIMO table with styled HTML
