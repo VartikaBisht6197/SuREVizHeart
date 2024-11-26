@@ -1,5 +1,5 @@
 
-extra_genes = c("HAND2", "GATA6")
+extra_genes = c("TBX18", "GATA4", "HNF4A")
 protien.coding.genes <- fread(file.path(dataDIR, "Homo.Sapiens.Gene.List.txt"), header = FALSE)$V1
 get.expression.plot = function(genes){
   genes = genes[genes %in% protien.coding.genes]
