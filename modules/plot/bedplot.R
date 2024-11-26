@@ -1,3 +1,11 @@
+# make y labels smaller if too big
+wrap_string <- function(str, x) {
+  # Split the string into chunks of x characters
+  split_str <- substring(str, seq(1, nchar(str), by = x), seq(x, nchar(str) + x - 1, by = x))
+  # Combine the chunks with a newline separator
+  paste(split_str, collapse = "-\n")
+}
+
 
 # Define a function to plot a single BED file
 plot.single.bed <- function(chr, pos1, pos2, pos, bed_file, file_name) {
@@ -20,20 +28,23 @@ plot.single.bed <- function(chr, pos1, pos2, pos, bed_file, file_name) {
         theme(
             axis.text.y = element_blank(),
             axis.ticks.y = element_blank(),
-            axis.title.y = element_text(vjust = 1, hjust = 0.5, size = 14)
+            axis.title.y = element_text(vjust = 1, hjust = 0.5)
         ) +
-        labs(y = file_name, x = "") +
-        coord_cartesian(xlim = c(pos1, pos2)) } else {
+        labs(y = wrap_string(file_name,15), x = "") +
+        coord_cartesian(xlim = c(pos1, pos2)) 
+        
+        } else {
+
            bed.plot = ggplot() +
-            geom_line(aes(x = c(pos1, pos2), y = c(0, 1)), linetype = "dashed") +
+            geom_line(aes(x = c(pos1, pos2), y = c(0, 1)), linetype = "dashed", color = "transparent") +
             labs(fill = "") +
             xlab("") +
-            ylab("") +
+            ylab(wrap_string(file_name,30)) +
             guides(color = FALSE) +
             coord_cartesian(xlim = c(pos1, pos2)) +
             theme_bw() +
             theme(
-              axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank(),
+              axis.text.x = element_blank(), axis.title.x = element_blank(),
               axis.text.y = element_blank(), axis.ticks.y = element_blank())
         }
 
