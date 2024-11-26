@@ -39,41 +39,57 @@ queryBox <- function() {
                 )
             ),
 
-            # Second row with action buttons and file upload
+            # Second row with action buttons
             fluidRow(
+                # Second row with action buttons (Render and Download)
                 column(
                     12,
-                    style = "display: flex; align-items: center;", # Style for aligning items horizontally
                     actionButton(
                         "runButton", # Button ID for rendering
                         "Render", # Button label
                         icon = icon("play"), # Button icon
                         class = "btn-primary", # Button style class
-                        style = "margin-left: 10px;" # Inline style for spacing
-                    ),
-                    shinyFilesButton(
-                        "file", # Button ID for file upload
-                        "Upload Files", # Button label
-                        title = "Select files", # Button title
-                        multiple = TRUE, # Allow multiple file selection
-                        class = "btn-primary", # Button style class
-                        icon = icon("upload"), # Button icon
-                        style = "margin-left: 10px;" # Inline style for spacing
+                        style = "margin-top: 10px;" # Inline style for spacing
                     ),
                     downloadButton(
                         "downloadData", # Button ID for downloading data
-                        "Download data/error report", # Button label
+                        "Download Files", # Button label
                         class = "btn-primary", # Button style class
-                        style = "margin-left: 10px;", # Inline style for spacing
+                        style = "margin-top: 10px;", # Inline style for spacing
                         icon = icon("download") # Button icon
                     )
-                ),
+                )
+            ),
+
+            # Third row for uploads and UI for uploaded files
+            fluidRow(
+                style = "margin-top: 30px;", # Adds 30px space above this row
                 column(
                     12,
-                    uiOutput("selected_files"), # Dynamic UI output for displaying selected files
-                    style = "margin-top: 10px;" # Inline style for spacing
+                    # Add the line and message above the file upload box
+                    div(
+                        style = "border-top: 2px solid #64BEA5; padding-top: 10px; margin-bottom: 15px;  text-align: center;",
+                        span(
+                            "Please refer to the 'Uploaded Tracks Viewer' tab for expected format of uploaded files",
+                            style = "font-size: 14px; color: #64BEA5; font-weight: bold;"
+                        )
+                    ),
+                    # File upload container with dotted box
+                    div(
+                        class = "file-upload-container",
+                        fileInput(
+                            "file",
+                            label = NULL,
+                            multiple = TRUE,
+                            placeholder = "Upload files (max 10 files can be uploaded)",
+                            accept = c(".bed", ".bw", ".bigwig", ".bigWig", ".tsv")
+                        ),
+                        # Display uploaded files
+                        uiOutput("selected_files")
+                    )
                 )
             )
+
         )
     )
 }
