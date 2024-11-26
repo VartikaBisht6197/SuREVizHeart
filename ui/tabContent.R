@@ -19,7 +19,7 @@ tabContent <- function() {
                 includeHTML(file.path(appDIR, "www", "SuREViz.html")), # Include HTML content for impact assessment
                 div(
                     style = "overflow: auto;",
-                    withSpinner(plotlyOutput("plotTab1", height = "800px", width = "100%")) # Plotly output with spinner for loading
+                    withSpinner(plotlyOutput("plotTab1", height = "1200px", width = "100%")) # Plotly output with spinner for loading
                 )
             )
         ),
@@ -45,7 +45,7 @@ tabContent <- function() {
                 includeHTML(file.path(appDIR, "www", "gene.expression.summary.html")), # Include HTML content for gene expression
                 div(
                     style = "overflow: auto;",
-                    withSpinner(plotOutput("plotTab3", width = "100%", height = "1000px")) # Plot output with spinner for loading
+                    withSpinner(plotOutput("plotTab3", width = "100%", height = "800px")) # Plot output with spinner for loading
                 )
             )
         ),
@@ -54,11 +54,11 @@ tabContent <- function() {
         tabItem(
             tabName = "sure_profiles",
             box(
-                width = 12, status = "primary", solidHeader = TRUE, title = "Integrating Complementary Datasets with SuRE Data",
+                width = 12, status = "primary", solidHeader = TRUE, title = "SuRE Profiles",
                 includeHTML(file.path(appDIR, "www", "SuREprofileView.html")), # Include HTML content for SuRE profile view
                 div(
                     style = "overflow: auto;",
-                    withSpinner(plotOutput("plotTab2", width = "100%", height = "1000px")) # Plot output with spinner for loading
+                    withSpinner(plotOutput("plotTab2", width = "100%", height = "1800px")) # Plot output with spinner for loading
                 )
             )
         ),
@@ -67,7 +67,7 @@ tabContent <- function() {
         tabItem(
             tabName = "jaspar",
             box(
-                width = 12, status = "primary", solidHeader = TRUE, title = "Transcription Factor Disruption Analysis",
+                width = 12, status = "primary", solidHeader = TRUE, title = "Transcription Factor Binding Site Impact (TFBSi)",
                 includeHTML(file.path(appDIR, "www", "TF.impact.html")), # Include HTML content for TF disruption analysis
                 div(
                     style = "overflow: auto; width: 100%; text-align: center; margin-bottom: 20px;",
@@ -111,9 +111,10 @@ tabContent <- function() {
             tabName = "comparative_study",
             box(
                 width = 12, status = "primary", solidHeader = TRUE, title = "Uploaded Tracks Viewer",
+                includeHTML(file.path(appDIR, "www", "UserUpload.html")), # Include HTML content for variant summary
                 div(
                     style = "overflow: auto;",
-                    withSpinner(plotOutput("plotTab5", width = "100%", height = "1000px")) # Plot output with spinner for loading
+                    withSpinner(plotOutput("plotTab5", width = "100%", height = "3000px")) # Plot output with spinner for loading
                 )
             )
         )
