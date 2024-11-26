@@ -41,6 +41,7 @@ suppressPackageStartupMessages({
   library(shinyjs)
   library(tidyr)
   library(universalmotif)
+  library(uuid)
   library(zip)
 })
 
@@ -52,18 +53,26 @@ suppressPackageStartupMessages({
 pvalcutoff <- 0.004581764808767
 # Cutoff value for SuRE signal intensity
 SureSignalcutoff <- 3
+# Set alpha ranges
+# ifelse(suredata$wilcox.p.value < pvalcutoff,
+#    -log10(suredata$wilcox.p.value) * 100,
+#    -log10(suredata$wilcox.p.value) / 100
+#  ) -log10(0.004581764808767) / 100
+alpha_max <- -log10(1.175478e-40) * 100 # Minimum p value
+alpha_min <- -log10(0.9998009) / 100 # Second max p value (as max will be 0, as max p value is 1)
+
 
 # Directories for data and plots
 DBQueryScriptsDIR <- file.path(appDIR, "modules" ,"query")
 
 # Define lists of bigwig files for different patients
 bigwigs <- list(
+  "SuREX38" = file.path(dataDIR, "data", "SuREX38.bw"),
   "SuREX57" = file.path(dataDIR, "data", "SuREX57.bw"),
   "SuREX59" = file.path(dataDIR, "data", "SuREX59.bw"),
   "SuREX67" = file.path(dataDIR, "data", "SuREX67.bw"),
   "SuREX68" = file.path(dataDIR, "data", "SuREX68.bw"),
-  "SuREX86" = file.path(dataDIR, "data", "SuREX86.bw"),
-  "SuREX38" = file.path(dataDIR, "data", "SuREX38.bw")
+  "SuREX86" = file.path(dataDIR, "data", "SuREX86.bw")
 )
 
 # Define list of ATAC-seq data files
