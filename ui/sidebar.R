@@ -34,9 +34,9 @@ sidebar <- function() {
                 icon = icon("chart-simple")
             ),
 
-            # Menu item for Integrating Complementary Datasets
+            # Menu item for SuRE Profiles
             menuItem(
-                "Integrating Complementary Datasets",
+                "SuRE Profiles",
                 tabName = "sure_profiles",
                 icon = icon("dna")
             ),
@@ -48,7 +48,7 @@ sidebar <- function() {
                 icon = icon("vial"), # Icon for the main menu item
                 style = "background-color: #e9e9e9;", # Background color for the highlighted menu item
                 menuSubItem(
-                    "Transcription Factor Disruption Analysis", # Sub-menu item title
+                    "Transcription Factor Binding Site Impact (TFBSi)", # Sub-menu item title
                     tabName = "jaspar" # Tab name associated with this sub-item
                 ),
                 menuSubItem(
