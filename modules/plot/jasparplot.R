@@ -194,7 +194,7 @@ if (!is.na(pos) && nrow(suredata) != 0) {
       # Run the JASPAR analysis
       jaspar_output <- jaspar.analysis(jaspar.data, JASPAR.PPM)
       motifs <- (nrow(jaspar_output$table) + 2) / plots_in_one_set
-      log.this.info("JASPAR Plot : Plotted JASPAR TFs affected by query variant. ✅")
+      message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "JASPAR Plot : Plotted JASPAR TFs affected by query variant. ✅"))
     }
   } else {
     # Render an empty plot if no data is found
@@ -208,7 +208,7 @@ if (!is.na(pos) && nrow(suredata) != 0) {
           axis.ticks = element_blank(),
           panel.grid = element_blank()
         )
-      log.this.info("JASPAR Plot : Plotted empty plot. The variant does not affect any TFBS (as defined by JASPAR 2022 CORE) significantly. ⚠️")
+      message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "JASPAR Plot : Plotted empty plot. The variant does not affect any TFBS (as defined by JASPAR 2022 CORE) significantly. ⚠️"))
     } else {
       jaspar_output$plot <- ggplot() +
         theme_minimal() +
@@ -219,7 +219,7 @@ if (!is.na(pos) && nrow(suredata) != 0) {
           axis.ticks = element_blank(),
           panel.grid = element_blank()
         )
-      log.this.info("JASPAR Plot : Plotted empty plot. The variant selected is not an raQTL. ⚠️")
+      message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "JASPAR Plot : Plotted empty plot. The variant selected is not an raQTL. ⚠️"))
     }
   }
 } else {
@@ -233,5 +233,5 @@ if (!is.na(pos) && nrow(suredata) != 0) {
       axis.ticks = element_blank(),
       panel.grid = element_blank()
     )
-  log.this.info("JASPAR Plot : Plotted empty plot. No variant selected. ⚠️")
+  message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "JASPAR Plot : Plotted empty plot. No variant selected. ⚠️"))
 }
