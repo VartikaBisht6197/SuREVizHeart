@@ -81,6 +81,11 @@ AC16ATACbw <- list(
   "AC16\nATAC" = file.path(dataDIR, "data", "AC16.ATACseq.hg38.bw")
 )
 
+# Define hg38 PhyloP 30 way conservation track
+Consbw <- list(
+  "Conservation\nphyloP 30 way" = file.path(dataDIR, "data", "hg38.phyloP30way.bw")
+)
+
 # Utility functions
 
 # Function to convert values to kilo bases (kb)

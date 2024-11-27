@@ -73,7 +73,8 @@ bigwig.plot <- wrap_plots(
     gene.plot,
     SuREbigwigplots,
     plot.bigwigs(chr, pos1, pos2, pos, AC16ATACbw, "#645200", "common"),
-    ncol = 1, heights = c(0.3, 0.2, 0.7, 0.1)
+    plot.bigwigs(chr, pos1, pos2, pos, Consbw, "#035218cd", "common") + coord_cartesian(ylim = c(0,1)),
+    ncol = 1, heights = c(0.3, 0.2, 0.7, 0.1, 0.1)
 )
 message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "SuRE Bigwig Tracks : Plotted SuRE bigwig and AC16 ATACseq plot ✅"))
 
