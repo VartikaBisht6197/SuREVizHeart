@@ -81,9 +81,9 @@ AC16ATACbw <- list(
   "AC16\nATAC" = file.path(dataDIR, "data", "AC16.ATACseq.hg38.bw")
 )
 
-# Define hg38 PhyloP 30 way conservation track
+# Define hg38 PhastCons 30 way conservation track
 Consbw <- list(
-  "Conservation\nphyloP 30 way" = file.path(dataDIR, "data", "hg38.phyloP30way.bw")
+  "Conservation\nPhastCons 30 way" = file.path(dataDIR, "data", "hg38.phastCons30way.bw")
 )
 
 # Utility functions
