@@ -173,18 +173,18 @@ jaspar_output <- list(
 )
 
 # Initialize jaspar.data as NULL
-jaspar.data <- NULL
+jaspar.data <<- NULL
 
 # Process data if position is specified and suredata is not empty
 if (!is.na(pos) && nrow(suredata) != 0) {
   # Run grep command to check for rows in the JASPAR data file
-  grep_output <- system(paste0("grep -w ", pos, " ", file.path(dataDIR, "JASPAR2022.HLHS.raQTL.TF.filter.txt")), intern = TRUE)
+  grep_output <- system(paste0("grep -w ", pos, " ", file.path(dataDIR, "JASPAR2022.raQTL.TF.filter.txt ")), intern = TRUE)
 
   # Check if the grep command returns any rows
   if (length(grep_output) > 0) {
     # Read the data into jaspar.data
-    jaspar.data <- fread(cmd = paste0("grep -w ", pos, " ", file.path(dataDIR, "JASPAR2022.HLHS.raQTL.TF.filter.txt")), sep = "\t")
-    colnames(jaspar.data) <- colnames(fread(cmd = paste("head -n1", file.path(dataDIR, "JASPAR2022.HLHS.raQTL.TF.filter.txt")), header = TRUE))
+    jaspar.data <- fread(cmd = paste0("grep -w ", pos, " ", file.path(dataDIR, "JASPAR2022.raQTL.TF.filter.txt ")), sep = "\t")
+    colnames(jaspar.data) <- colnames(fread(cmd = paste("head -n1", file.path(dataDIR, "JASPAR2022.raQTL.TF.filter.txt ")), header = TRUE))
 
     if (nrow(jaspar.data) == 1 & (jaspar.data$CHROM == chr & jaspar.data$POS == pos & jaspar.data$REF == query_snps$REF & jaspar.data$ALT == query_snps$ALT)) {
       # Load JASPAR PPM data
