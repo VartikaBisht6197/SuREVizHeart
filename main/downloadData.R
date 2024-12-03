@@ -50,7 +50,7 @@ output$downloadData <- downloadHandler(
 
         # Save JASPAR motif information as a CSV file if available
         if (!is.null(jaspar.data)) {
-            csv_path <- file.path(temp_dir, "JASPAR2020_info.csv")
+            csv_path <- file.path(temp_dir, "JASPAR2022_info.csv")
             write.csv(jaspar.data, csv_path, row.names = FALSE)
         }
 
