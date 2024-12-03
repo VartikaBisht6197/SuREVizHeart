@@ -55,7 +55,7 @@ output$plotTab3 <- renderPlot(
     gene.expression.plots
   },
   res = 100,
-  width = 800
+  height = ngenes * 75
 )
 
 # Output user-defined BigWig plot
