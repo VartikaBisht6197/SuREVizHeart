@@ -382,7 +382,7 @@ We specifically highlight gene expression for TBX18 and GATA4, which are known c
 
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
-  <img src="images/fig6.png" style="display: block; margin: 0 auto; height: 200px; width: 90%;" alt="3">
+  <img src="images/fig5.png" style="display: block; margin: 0 auto; height: 200px; width: 90%;" alt="3">
    </br>
   <p><strong>Gene Expression Overview Tab:</strong> This screenshot highlights the expression of genes within the locus of interest as shown in <strong>Functional Impact Assessment Tab</strong>.</p>
 </div>
@@ -408,7 +408,7 @@ This section explores the SuRE profiles obtained for patients analyzed in this s
 
 </br>
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
-  <img src="images/fig7.png" style="display: block; margin: 0 auto; height: 400px; width: 50%;" alt="3">
+  <img src="images/fig6.png" style="display: block; margin: 0 auto; height: 400px; width: 50%;" alt="3">
   </br>
   <p><strong>SuRE Profiles Tab:</strong> This screenshot highlights the SuRE expression profile of patients (subset) centered around variant NC_000012.12:g.128797635T>C. The dotted line indicating the location of selected variant.</p>
 </div>
@@ -434,7 +434,7 @@ When exploring a variant, this feature evaluates disruptions in transcription fa
   Metrics showing how TF affinity is altered from REF to ALT, indicating whether binding strength is enhanced or diminished.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
-  <img src="images/fig8.png" style="display: block; margin: 0 auto; height: 200px; width: 70%;" alt="3">
+  <img src="images/fig7.png" style="display: block; margin: 0 auto; height: 200px; width: 70%;" alt="3">
   </br>
   <p><strong>Transcription Factor Binding Site Impact (TFBSi) Tab:</strong> This screenshot highlights the alignment of the TFBS affected by NC_000012.12:g.128797635T>C to the reference and alternate sequence as shown in the TFBSi tab.</p>
 </div>
