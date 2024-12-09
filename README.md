@@ -2,13 +2,143 @@ SuREViz: A Web-Based SuRE MPRA Data Exploration Tool to Visualize the
 Impact of Nucleotide Variants
 ================
 Vartika Bisht
-2024-12-03
+2024-12-09
 
-# Introduction
+<style>
+/* General Styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: white;
+  color: #2c3e50;
+  line-height: 1.8;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+&#10;h1 {
+  font-family: 'Georgia', serif;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #34495e;
+  border-bottom: 3px solid #2980b9;
+  padding-bottom: 10px;
+  display: block;
+}
+&#10;.subtitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.2em;
+  color: #34495e;
+  margin-top: 10px;
+}
+&#10;.subtitle span {
+  margin-right: 20px;
+}
+&#10;h2, h3 {
+  font-family: 'Georgia', serif;
+  color: #34495e;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+&#10;h2 {
+  font-size: 2em;
+  margin-top: 30px;
+}
+&#10;h3 {
+  font-size: 1.5em;
+  margin-top: 20px;
+  font-weight: bold;
+}
+&#10;p {
+  margin-bottom: 15px;
+}
+&#10;ul, ol {
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+&#10;blockquote {
+  border-left: 5px solid #2980b9;
+  background: #ecf7fe;
+  padding: 10px 20px;
+  font-style: italic;
+  color: #34495e;
+  margin: 20px 0;
+}
+&#10;a {
+  color: #3498db;
+  text-decoration: none;
+}
+&#10;a:hover {
+  text-decoration: underline;
+}
+&#10;/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;d
+}
+&#10;table, th, td {
+  border: 1px solid #ddd;
+}
+&#10;th {
+  background-color: #2980b9;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+}
+&#10;td {
+  padding: 10px;
+  text-align: left;
+}
+&#10;/* Floating TOC Enhancements */
+#toc {
+  background-color: #ecf0f1;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+&#10;#toc .active {
+  font-weight: bold;
+  color: #2980b9;
+}
+&#10;/* Specific Section Styling */
+section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+&#10;section h2 {
+  font-size: 1.8em;
+  color: #2980b9;
+}
+&#10;section ul, section ol {
+  margin-left: 30px;
+}
+&#10;img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+&#10;footer {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.2em;
+}
+&#10;footer a {
+  font-weight: bold;
+}
+</style>
+
+# Introduction to SuREViz
 
 Welcome to **SuREViz**, your go-to tool for exploring the functional
-impacts of genetic variants. This user manual will guide you through the
-platform’s features, functionalities, and capabilities.
+impacts of genetic variants assessed by SuRE. This user manual will
+guide you through the platform’s features, functionalities, and
+capabilities.
 
 <div style="background-color: #ecf0f1; padding: 15px; border-radius: 5px; margin-left: 20px;">
 
@@ -16,7 +146,56 @@ platform’s features, functionalities, and capabilities.
 
 - Interactive visualization of over 4.7 million variants.  
 - Integration of functional, genomic, and clinical datasets.  
-- Tools for uploading and comparing your own data.  
+- Tools for uploading and comparing your own bigwig, bed and MPRA
+  data.  
+
+</div>
+
+------------------------------------------------------------------------
+
+# What is SuRE ?
+
+SuRE, or **Survey of Regulatory Elements**, is a massively parallel
+reporter assay to study gene regulation. In this approach, genomic DNA
+from an individual is randomly fragmented into small pieces and cloned
+into a plasmid vector. Each fragment is placed just upstream of a unique
+20-base-pair (bp) barcode, followed by a GFP coding sequence and a polyA
+signal. By mapping these barcoded DNA fragments back to the human
+reference genome and measuring their expression levels in a specific
+cell line, we can directly associate allele-specific gene expression
+with their genomic locations.
+
+To investigate regulatory variants potentially involved in human heart
+development and function, we applied SuRE to samples from six patients
+or their close relatives, all from families with a history of multiple
+heart defects. From this work, we created six highly complex plasmid
+libraries, each containing approximately 600 million unique clones.
+These libraries, named **SuREX38, SuREX57, SuREX59, SuREX86, SuREX67,**
+and **SuREX68**, represent a valuable resource for identifying
+regulatory variants associated with heart disease.
+
+The browser includes a comprehensive dataset of 4.7 million genetic
+variants evaluated in a myocardial cell line, categorized into reporter
+assay QTLs (raQTLs) and non-raQTLs. Variants are classified as raQTLs
+(18,201 variants) if they exhibit a significant difference in expression
+between the reference and alternate alleles, indicating their potential
+to impact gene expression. Variants that do not show such differential
+expression are labeled as non-raQTLs.
+
+<div style="text-align: left; max-width: 100%; margin: 0 auto;">
+
+<img src="images/fig1.png" style="display: block; margin: 0 auto; height: 400px; width: 100%;" alt="2">
+</br>
+<p>
+
+<strong>SuRE Assay:</strong> An overview of the SuRE strategy to
+functionally assess genomic variants (SNPs and InDels) for their
+regulatory activity in a heart-derived cell line. Among 4.7 million
+variants analysed, 18,201 reporter assay quantitative trait loci
+(raQTLs) were identified. gDNA, genomic DNA fragment; ORF, open reading
+frame; PAS, polyadenylation signal; REF, reference; ALT, alternate; FDR,
+false discovery rate.
+</p>
 
 </div>
 
@@ -46,12 +225,14 @@ You can access the SuRE Viz app at:
 
 ### Search Functionality
 
-- **Variants:** Enter the chr:pos format (e.g., chr1:128797635).
+- **Variants:** Enter the chr:pos format (e.g., chr12:128797635).
   - The variant must be functionally assessed by SuRE MPRA. If the
     variant is not available, the app will display an error message.
 - **Genes:** Enter the gene name (case-insensitive, e.g., TBP or tbP).
-  - Gene names should follow the specifications of the **GENCODE GTF
-    GRCh38.p14 Human Release 46**.
+  - Gene names should follow the specifications of the [GENCODE GTF
+    GRCh38.p14 Human Release
+    46](https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/)
+    .
 
 ------------------------------------------------------------------------
 
@@ -92,12 +273,12 @@ following:
       and alternate allele of the variant.
 
     - **motif_alt_id, motif_id**  
-      The motif name and ID of the TF as specified in the **JASPAR
-      2022** database.
+      The motif name and ID of the TF as specified in the [JASPAR
+      2022](https://jaspar2022.genereg.net/collection/core/) database.
 
     - **start, end, strand, pos**  
-      The start and end positions of where the TF aligns to the human
-      sequence, along with the strand and position.
+      The start and end positions of where the TF binding site/motif
+      aligns to the human sequence, along with the strand and position.
 
     - **refs.score, alts.score, refs.pval, alts.pval**  
       The **TFBSi scores** and **p-values** as calculated by the
@@ -112,24 +293,26 @@ following:
         alternate scores.
       - **max.score**: The higher of the reference or alternate score.
       - **effect.JASPAR**: Quantifies the change in binding using the
-        formula: -log10(p-value of ref / p-value of alt), indicating the
+        formula: -log10(p-value of REF / p-value of ALT), indicating the
         effect of the variant on TF binding.
 
-    - **tax_group, tf_family, tf_class, pubmed_ids, uniprot_ids,
+    - **tax_group, TF_family, TF_class, pubmed_ids, uniprot_ids,
       data_type, Gene_Name**  
       Additional information about the TF:
 
       - **tax_group**: The taxonomic group of the TF.
-      - **tf_family**: The family of the TF.
-      - **tf_class**: The class of the TF.
-      - **pubmed_ids**: PubMed IDs of relevant papers where the TF is
-        mentioned.
-      - **uniprot_ids**: UniProt ID of the gene linked to the TF.
+      - **TF_family**: The family of the TF.
+      - **TF_class**: The class of the TF.
+      - **pubmed_ids**: [PubMed](https://pubmed.ncbi.nlm.nih.gov/) IDs
+        of relevant papers where the TF is mentioned.
+      - **uniprot_ids**:
+        [UniProt](https://www.uniprot.org/uniprotkb?query=*) ID of the
+        gene linked to the TF.
       - **data_type**: The experimental data type used to define this
         TF, e.g., **HT-SELEX**.
-      - **Gene_Name**: The gene name associated with the TF (since we
-        consider only TFs expressed in the cell type used for the MPRA
-        assay).
+      - **Gene_Name**: The gene name associated with the TF according to
+        the [UniProt](https://www.uniprot.org/uniprotkb?query=*)
+        database.
 
 2.  **SNP_info.csv**  
     A CSV file containing tabular data as presented in the **Variant
@@ -137,13 +320,14 @@ following:
     SNPs, such as their chromosomal positions and related information.
 
 3.  **SuREX\_.bedGraph**  
-    A **BEDGraph** file containing the **SuRE profile** for the locus
+    A **BEDGraph** file containing the **SuRE Profiles** for the locus
     you queried. This file is specifically generated for the variant
     locus and provides the SuRE data relevant to that region.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig1.png" style="display: block; margin: 0 auto; height: 300px; width: 100%;" alt="1">
+<img src="images/fig2.png" style="display: block; margin: 0 auto; height: 300px; width: 100%;" alt="1">
+</br>
 <p>
 
 <strong>Search Functionality:</strong> This screenshot highlights the
@@ -177,13 +361,14 @@ Track Viewer</strong> tab.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig2.png" style="display: block; margin: 0 auto; height: 400px; width: 100%;" alt="2">
+<img src="images/fig3.png" style="display: block; margin: 0 auto; height: 375px; width: 80%;" alt="2">
+</br>
 <p>
 
 <strong>Visualization Modes:</strong> This screenshot highlights the two
 visualisation modes possible where in one you can target a variant of
-intrest that has been functionally assessed by us in our SuRE assay and
-the gene of intrest.
+intrest that has been functionally assessed by SuRE assay and the gene
+of intrest.
 </p>
 
 </div>
@@ -195,8 +380,8 @@ the gene of intrest.
 ### Functional Impact Assessment
 
 - **SuRE Impact Plot:**  
-  Displays the expression levels of reference and alternate alleles.
-  - **Height:** Represents expression levels.  
+  Displays the expression levels of REF and ALT alleles.
+  - **Height:** Represents SuRE expression levels.  
   - **Width/Opacity:** Indicates statistical significance of
     differences.  
 - **Gene Plot:**  
@@ -205,12 +390,13 @@ the gene of intrest.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig3.png" style="display: block; margin: 0 auto; height: 475px; width: 55%;" alt="3">
+<img src="images/fig4.png" style="display: block; margin: 0 auto; height: 375px; width: 40%;" alt="3">
+</br>
 <p>
 
 <strong>Functional Impact Assessment Tab:</strong> This screenshot
 highlights the SuRE impact and gene plot in the functional impact
-assessment tab for variant chr12-128797635-T-C.
+assessment tab for variant NC_000012.12:g.128797635T\>C.
 </p>
 
 </div>
@@ -229,8 +415,8 @@ Provides a detailed table of all variants in the query region:
 | **Position (hg38)** | Specifies the genomic position of the variant according to the human hg38 reference genome. |
 | **Reference Allele** | Indicates the reference allele at the variant’s position. |
 | **Alternate Allele** | Indicates the alternate allele observed at the variant’s position. |
-| **rsID** | The rsID, if available in dbSNP150, assigned to the variant. |
-| **Population Allele Frequency** | Provides the allele frequency of the variant in the gnomAD 3.1.2 database across various populations. |
+| **rsID** | The rsID, if available in [dbSNP150](https://www.ncbi.nlm.nih.gov/snp/), assigned to the variant. |
+| **Population Allele Frequency** | Provides the allele frequency of the variant in the [gnomADv3.1.2](https://www.ncbi.nlm.nih.gov/snp/) database across various populations. |
 | **SuRE Impact Score** | SuRE MPRA impact score indicating the variant’s effect on transcription. |
 | **Genotype in SuREXX** | Indicates the genotype of the variant in each SuREXX sample (e.g., SuRE38, SuRE57, etc.). |
 | **Alternate Allele Coverage** | Specifies the coverage (number of fragments) for the alternate allele. |
@@ -255,20 +441,21 @@ the following contexts:
 - **Fetal human heart at developmental stages**
 - **Fetal tissues during development**
 - **Healthy (non-failing) adult human heart**
-- **In-vitro differentiated cardiomyocytes** and undifferentiated human
+- **In vitro differentiated cardiomyocytes** and undifferentiated human
   embryonic stem cells (H1)
-- **AC16 cell line** where SuRE constructs are transfected
+- **AC16 cell line** used for SuRE experiments
 - **Human neural crest cells** (migrating from the neural tube and
   entering the heart from pharyngeal arches)
 
 We specifically highlight gene expression for TBX18 and GATA4, which are
-known cardiac stem cell marker genes expressed highly during
+known cardiac stem cell marker genes highly expressed during
 development, as well as HNF4A, a liver-specific gene, to show contrast
 in tissue-specific expression.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig5.png" style="display: block; margin: 0 auto; height: 200px; width: 90%;" alt="3">
+<img src="images/fig6.png" style="display: block; margin: 0 auto; height: 200px; width: 90%;" alt="3">
+</br>
 <p>
 
 <strong>Gene Expression Overview Tab:</strong> This screenshot
@@ -282,26 +469,25 @@ in <strong>Functional Impact Assessment Tab</strong>.
 
 </br>
 
-### SuRE Profile
+### SuRE Profiles
 
-This section looks into the functional profiles of patients analyzed in
-this study, complemented by insights from the AC16 ATAC-seq dataset and
-conservation scores across multiple species. Together, these datasets
-provide a comprehensive understanding of regulatory mechanisms and
-evolutionary conservation within the loci of interest.
+This section explores the SuRE profiles obtained for patients analyzed
+in this study, complemented by insights from the AC16 ATAC-seq dataset
+and conservation scores across multiple species. Together, these
+datasets provide a comprehensive understanding of regulatory mechanisms
+and evolutionary conservation within the loci of interest.
 
-1.  **SuRE Profiles of Patients:**  
-    The analysis begins with SuRE profiles derived from congenital heart
-    disease patients, as discussed in the cited referenced paper. These
-    profiles offer valuable insights into the functional behavior of
-    genomic regions within individuals.
+1.  **SuRE Profile of Patients:**  
+    The analysis begins with SuRE Profiless derived from congenital
+    heart disease patients. These profiles offer valuable insights into
+    the functional behavior of genomic regions within individuals.
 
 2.  **AC16 ATAC-seq Data:**  
-    Since SuRE libraries are introduced into the AC16 Human
-    Cardiomyocyte Cell Line, we incorporate AC16 ATAC-seq data. This
-    dataset highlights regions of open chromatin within the endogenous
-    AC16 genome, providing context for chromatin accessibility and
-    regulatory potential.
+    Since SuRE libraries were tested in the AC16 Human Cardiomyocyte
+    Cell Line, we incorporate AC16 ATAC-seq data. This dataset
+    highlights regions of open chromatin within the endogenous AC16
+    genome, providing context for chromatin accessibility and regulatory
+    potential.
 
 3.  **PhasCon Score:**  
     These scores represent conservation scores across 30 mammalian
@@ -313,13 +499,14 @@ evolutionary conservation within the loci of interest.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig4.png" style="display: block; margin: 0 auto; height: 400px; width: 50%;" alt="3">
+<img src="images/fig7.png" style="display: block; margin: 0 auto; height: 400px; width: 50%;" alt="3">
+</br>
 <p>
 
-<strong>SuRE Profile Tab:</strong> This screenshot highlights the SuRE
+<strong>SuRE Profiles Tab:</strong> This screenshot highlights the SuRE
 expression profile of patients (subset) centered around variant
-chr12-128797635-T-C. The dotted line indicating the location of selected
-variant.
+NC_000012.12:g.128797635T\>C. The dotted line indicating the location of
+selected variant.
 </p>
 
 </div>
@@ -342,8 +529,8 @@ raQTLs (please refer to the cited manuscript for defination of raQTL).
 Key details include:
 
 - **Predicted Alignment:**  
-  Alignment of the TF with both reference (REF) and alternate (ALT)
-  sequences, offering insights into binding behavior.
+  Alignment of the TF motif with both REF and ALT sequences, offering
+  insights into binding behavior.
 
 - **Predicted Affinity Change:**  
   Metrics showing how TF affinity is altered from REF to ALT, indicating
@@ -351,13 +538,14 @@ Key details include:
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig6.png" style="display: block; margin: 0 auto; height: 200px; width: 70%;" alt="3">
+<img src="images/fig8.png" style="display: block; margin: 0 auto; height: 200px; width: 70%;" alt="3">
+</br>
 <p>
 
 <strong>Transcription Factor Binding Site Impact (TFBSi) Tab:</strong>
 This screenshot highlights the alignment of the TFBS affected by
-chr12-128797635-T-C to the reference and alternate sequence as shown in
-the TFBSi tab.
+NC_000012.12:g.128797635T\>C to the reference and alternate sequence as
+shown in the TFBSi tab.
 </p>
 
 </div>
