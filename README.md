@@ -454,7 +454,7 @@ in tissue-specific expression.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig6.png" style="display: block; margin: 0 auto; height: 200px; width: 90%;" alt="3">
+<img src="images/fig5.png" style="display: block; margin: 0 auto; height: 200px; width: 90%;" alt="3">
 </br>
 <p>
 
@@ -499,7 +499,7 @@ and evolutionary conservation within the loci of interest.
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig7.png" style="display: block; margin: 0 auto; height: 400px; width: 50%;" alt="3">
+<img src="images/fig6.png" style="display: block; margin: 0 auto; height: 400px; width: 50%;" alt="3">
 </br>
 <p>
 
@@ -538,7 +538,7 @@ Key details include:
 
 <div style="text-align: left; max-width: 100%; margin: 0 auto;">
 
-<img src="images/fig8.png" style="display: block; margin: 0 auto; height: 200px; width: 70%;" alt="3">
+<img src="images/fig7.png" style="display: block; margin: 0 auto; height: 200px; width: 70%;" alt="3">
 </br>
 <p>
 
