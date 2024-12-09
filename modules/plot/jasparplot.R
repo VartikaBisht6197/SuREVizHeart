@@ -34,13 +34,13 @@ jaspar.analysis <- function(jaspar.data, JASPAR.PPM) {
 
   # Prepare the FIMO data frame by splitting rows and selecting the highest impact per TF
   FIMO <- data.frame(separate_rows(jaspar.data, start, end, strand, pos, motif_id, motif_alt_id,
-    refs.score, alts.score, refs.pval, alts.pval, absdiff,
-    max.score, effect.JASPAR, tax_group, tf_family, tf_class,
+    REF.score, ALT.score, REF.pval, ALT.pval, absdiff,
+    max.score, effect.JASPAR, tax_group, TF_family, TF_class,
     data_type, uniprot_ids, pubmed_ids, Gene_Name,
     sep = ","
   ))
-  FIMO$refs.score <- round(as.numeric(FIMO$refs.score), 0)
-  FIMO$alts.score <- round(as.numeric(FIMO$alts.score), 0)
+  FIMO$REF.score <- round(as.numeric(FIMO$REF.score), 0)
+  FIMO$ALT.score <- round(as.numeric(FIMO$ALT.score), 0)
   FIMO$effect.JASPAR <- round(as.numeric(FIMO$effect.JASPAR), 3)
   # Only keep the highest impact alignment per TF
   FIMO <- rbindlist(lapply(split(FIMO, FIMO$motif_alt_id), function(x) x[which(abs(x$effect.JASPAR) == max(abs(x$effect.JASPAR))), ]))
@@ -159,7 +159,7 @@ jaspar.analysis <- function(jaspar.data, JASPAR.PPM) {
   combined_plot <- wrap_plots(wrplt, ncol = 1)
 
   # Create and format the summary table
-  FIMO <- FIMO[, c("motif_id", "motif_alt_id", "tf_family", "tf_class", "effect.JASPAR")]
+  FIMO <- FIMO[, c("motif_id", "motif_alt_id", "TF_family", "TF_class", "effect.JASPAR")]
   colnames(FIMO) <- c("JASPAR 2022 Motif ID", "JASPAR 2022 Motif Name", "TF Family", "TF Class", "REF/ALT TF Binding")
 
   # Return the combined plot and the summary table
