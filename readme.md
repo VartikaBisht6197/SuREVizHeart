@@ -4,14 +4,6 @@ An R shiny platform designed for exploring the functional impact of genetic vari
 
 ---
 
-<p align="center">
-  <img src="images/Intro.png" alt="Introductory Figure" width="700px">
-</p>
-
-*Figure 1. Overview of the SuREViz platform and its functionality. A) Variant View in the “Functional Impact Assessment” Tab: Displays SuRE impact plot and the gene plot data for the region of interest. The yellow line and hover highlight indicate the specific variant queried by the user, confirming that it was assayed in SuRE. B) Region View in the “Functional Impact Assessment” tab: Displays SuRE impact plot and the gene plot data for the region of interest when a gene is queried, or when the queried variant was not assayed by SuRE. C) Menu Bar: Interface on the left side of the application for navigating through SuREViz features. D) Search Bar: Interface positioned on the right side of the menu bar, featuring a search box for input queries, a slider to adjust the flank from 1kb to 100kb (default set at 10kb), and three buttons for browse, download, and render. E)  “Variant Data Overview” tab: A detailed table of variants, including the queried variant, with data linked to the “Functional Impact Assessment” tab. F) “Gene Expression Overview” tab: Shows the expression profiles of relevant genes, including marker genes GAAT5 and TBX18 for cardiac stem cells, and HNF4A, a control gene highly expressed in liver tissue, across 38 tissue types. G) “Transcription Factor Binding Site Impact (TFBSi)” sub-tab in the “Highlighted Variant” tab: Shows binding motifs of transcription factors affected by the queried variant. H) “Genome Aggregation Database (gnomAD) Viewer” sub-tab in the “Highlighted Variant” Tab: Provides query results from the gnomAD database, including information about the queried variant if available. I) “ClinVar Viewer” sub-tab in the “Highlighted Variant” Tab: Displays ClinVar database results for the queried variant, if it is listed, to provide clinical significance and annotations. J) “SuRE Profile” Tab: Displays SuRE expression data for loci defined in the “Functional Impact Assessment” tab. The dotted line indicates the queried variant (if assayed by SuRE), alongside additional data like AC16 ATAC-seq profiles and PhastCons conservation scores across 30 mammalian species.*
-
----
-
 ## 🌟 Key Features
 
 ✨ **Interactive Visualization**: Explore over 4.7 million variants categorized into raQTLs and non-raQTLs.  
