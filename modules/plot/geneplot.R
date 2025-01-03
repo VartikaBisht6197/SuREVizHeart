@@ -15,6 +15,21 @@ plot.genes <- function(chr, pos1, pos2, pos, genedata) {
   genedata$strand <- factor(genedata$strand)
   levels(genedata$strand) <- list("Plus Strand Gene" = "+", "Minus Strand Gene" = "-")
 
+  # Determine the strands present in the data
+  strand_levels <- levels(genedata$strand)
+
+  # Dynamically set color mapping based on the strands present
+  if (all(strand_levels %in% unique(genedata$strand))) {
+    # Both strands are present
+    color_values <- c("Plus Strand Gene" = "blue", "Minus Strand Gene" = "red")
+  } else if ("Plus Strand Gene" %in% unique(genedata$strand)) {
+    # Only Plus Strand Gene is present
+    color_values <- c("Plus Strand Gene" = "blue")
+  } else {
+    # Only Minus Strand Gene is present
+    color_values <- c("Minus Strand Gene" = "red")
+  }
+
   # Create a ggplot object for gene visualization
   gene.plot <- ggplot(genedata, aes(text = paste0(
     "Gene Name: ", GENE, "\n",
@@ -24,14 +39,8 @@ plot.genes <- function(chr, pos1, pos2, pos, genedata) {
     geom_segment(aes(x = start, xend = end, y = GENE, yend = GENE, color = strand)) +
 
     # Customize color scales for strand
-    scale_color_manual(
-      values = c("blue", "red"),
-      labels = c("Plus Strand Gene", "Minus Strand Gene")
-    ) +
-    scale_fill_manual(
-      values = c("blue", "red"),
-      labels = c("Plus Strand Gene", "Minus Strand Gene")
-    ) +
+    scale_color_manual(values = color_values) +
+    scale_fill_manual(values = color_values) +
 
     # Customize labels and appearance
     labs(fill = "") +
@@ -56,6 +65,7 @@ plot.genes <- function(chr, pos1, pos2, pos, genedata) {
   return(gene.plot)
 }
 
+
 # Source the script to query the gene database
 source(file.path(DBQueryScriptsDIR, "DBquery.gene.r"))
 
@@ -75,22 +85,29 @@ if (!is.na(pos)) {
 
 # Create an empty Plotly plot if no data is found
 if (nrow(gene.plot$data) == 0) {
-  gene.plotly <- ggplot() +
+  gene.plot <- ggplot() +
+    geom_line(
+      aes(x = c(pos1, pos2), y = c(0, 1)),
+      linetype = "dashed", color = "transparent"
+    ) +
     labs(fill = "") +
     xlab("") +
-    ylab("Gene") +
+    ylab("Genes") +
     guides(color = FALSE) +
     coord_cartesian(xlim = c(pos1, pos2)) +
     theme_bw() +
     theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
       axis.title.x = element_blank(),
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank()
-    )
+    ) 
+
   if (!is.na(pos)) {
-    gene.plotly <- gene.plotly + geom_vline(xintercept = pos, colour = "black", linetype = "dashed")
+    gene.plot <- gene.plot + geom_vline(xintercept = pos, colour = "black", linetype = "dashed")
   }
-  gene.plotly <- ggplotly(gene.plotly)
+  gene.plotly <- ggplotly(gene.plot)
 } else {
   # Convert ggplot object to interactive Plotly plot
   gene.plotly <- ggplotly(gene.plot, tooltip = "text", showlegend = FALSE, dynamicTicks = FALSE)
