@@ -26,7 +26,7 @@ A cutting-edge platform designed for exploring the functional impact of genetic 
 ## 🔬 Data Sources
 
 - **Processed Data**: Available on OSF at [pyh83](https://osf.io/pyh83/).  
-- **Raw Data**: Accessible through GEO at ...
+- **Raw Data**: Accessible through GEO at [GSE251776](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251776).  
 
 ---
 
@@ -44,6 +44,13 @@ SuRE (Survey of Regulatory Elements) is a high-throughput assay used to study ge
 To begin your journey with SuREViz:  
 1. Ensure you have a modern web browser like **Google Chrome**, **Mozilla Firefox**, or **Safari**.  
 2. Access the platform here: **[SuREViz](http://192.168.107.99:6197)**  
+
+---
+
+## 🎓 Tutorial
+
+Get started quickly with our detailed step-by-step tutorial:  
+👉 **[SuREViz Tutorial](https://vartikabisht6197.github.io/SuREViz/SuREVizTutorial.html)** 👈  
 
 ---
 
