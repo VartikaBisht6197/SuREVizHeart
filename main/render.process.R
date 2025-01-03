@@ -325,3 +325,7 @@ source(file.path(appDIR, "main", "render.outputs.R"), local = TRUE )
 ####################
 # Source the script for handling the download of output data
 source(file.path(appDIR, "main", "downloadData.R"), local = TRUE )
+
+
+Sys.sleep(3)
+removeModal()
