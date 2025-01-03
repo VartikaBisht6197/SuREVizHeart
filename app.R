@@ -65,9 +65,6 @@ server <- function(input, output, session) {
     input_pass_test <- reactiveVal(FALSE)
     user_defined_files <- reactiveValues(files = list())
 
-    # Trigger confetti animation after the button is clicked
-    shinyjs::runjs("showConfetti();")
-
     message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Server started"))
 
     #---------------------------------------------------------------------------------------------
@@ -134,6 +131,28 @@ server <- function(input, output, session) {
             message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Input follows the guidlines. Processing underway. ✅"))
             # Trigger the confetti effect
             shinyjs::runjs("showConfetti();")
+            # Show the popup with a rendering message
+            showModal(
+                modalDialog(
+                    title = "Rendering in Progress",
+                    tags$div(
+                        style = "text-align: center; color: #333;",
+                        # First GIF (Loading spinner)
+                        tags$img(src = "https://i.gifer.com/ZKZg.gif", height = "100px"),
+                        tags$p("Please wait while rendering..."),
+                        tags$hr(), # Optional horizontal line for separation
+
+                        # Second GIF or Icon (Scroll Down instruction)
+                        tags$div(
+                            style = "text-align: center; margin-top: 20px;",
+                            tags$img(src = "https://i.gifer.com/UrB4.gif", height = "50px"), # Example scroll-down GIF
+                            tags$p("Scroll down to see the results below!")
+                        )
+                    ),
+                    easyClose = FALSE, # Prevent closing by clicking outside
+                    footer = NULL # No footer to remove the close button
+                )
+            )
 
             # Update reactive values based on input
             chr_value(chr) # Update chromosome value
@@ -213,6 +232,29 @@ server <- function(input, output, session) {
                                 updateTextInput(session, "search_query", value = search_query)
                                 # Trigger the confetti effect
                                 shinyjs::runjs("showConfetti();")
+                                # Show the popup with a rendering message
+                                showModal(
+                                    modalDialog(
+                                        title = "Rendering in Progress",
+                                        tags$div(
+                                            style = "text-align: center; color: #333;",
+                                            # First GIF (Loading spinner)
+                                            tags$img(src = "https://i.gifer.com/ZKZg.gif", height = "100px"),
+                                            tags$p("Please wait while rendering..."),
+                                            tags$hr(), # Optional horizontal line for separation
+
+                                            # Second GIF or Icon (Scroll Down instruction)
+                                            tags$div(
+                                                style = "text-align: center; margin-top: 20px;",
+                                                tags$img(src = "https://i.gifer.com/UrB4.gif", height = "50px"), # Example scroll-down GIF
+                                                tags$p("Scroll down to see the results below!")
+                                            )
+                                        ),
+                                        easyClose = FALSE, # Prevent closing by clicking outside
+                                        footer = NULL # No footer to remove the close button
+                                    )
+                                )
+
                                 # User confirmed to proceed with plotting
                                 message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", paste0("Valid click. Captured search query : ", search_query, " flank : ", flank)))
                                 # Reformat the search query as needed by the application
