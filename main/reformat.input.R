@@ -31,8 +31,29 @@
 ##################
 
 # Parse the search query and extract relevant information
+hg38.chrom.sizes = fread(file.path(dataDIR, "hg38.chrom.sizes"))
 query_parts <- strsplit(search_query, "[:,]")
 query_snps <- NULL
+
+# Function to validate input
+validate_number <- function(chr,pos) {
+  # Check if the input is numeric and matches the desired pattern (digits only)
+  if (grepl("^[0-9]+$", pos) && (as.numeric(pos)>=1) && (as.numeric(pos)<=hg38.chrom.sizes[hg38.chrom.sizes$V1 == chr,]$V2)) {
+    return(TRUE) # Input is valid
+  } else {
+    return(FALSE) # Input is invalid
+  }
+}
+
+# Function to validate chromosome name
+validate_chromosome <- function(chromosome) {
+  # Check if the chromosome matches the pattern "chr_" followed by 1-22 or X
+  if (grepl("^chr(1[0-9]|2[0-2]|[1-9]|X)$", chromosome)) {
+    return(TRUE)  # Valid chromosome
+  } else {
+    return(FALSE) # Invalid chromosome
+  }
+}
 
 # Reformat input
 # query_parts should be chr:pos or gene name
@@ -43,23 +64,56 @@ if (length(query_parts[[1]]) == 2) {
   # chr:pos format
   variant_view <- TRUE
   chr <- query_parts[[1]][1]
-  pos <- as.numeric(query_parts[[1]][2])
+  pos <- query_parts[[1]][2]
 
-  if(is.na(pos)){
+  if(!(validate_number(chr,pos) && validate_chromosome(chr)) ){
 
     # Alert user for invalid input format
-    message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Invalid input format.Please provide input in one of the following formats: chr:pos, or gene. ❌"))
+    message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "Invalid input format. Please provide input in one of the following formats: chr:pos, or gene. ❌"))
     shinyalert(
-      title = "Invalid input format",
-      text = "Please provide input in one of the following formats: chr:pos, or gene."
+      html = TRUE,
+      title = "Invalid Input Format",
+      text = paste0(
+        "<div style='text-align: left; font-family: Arial, sans-serif; font-size: 14px;'>",
+        "<strong>Oops! Your input appears to be in an incorrect format.</strong><br><br>",
+        "To search for a variant, please follow the required format:<br>",
+        "<ul style='margin-left: 20px;'>",
+        "  <li><strong>chr:pos</strong></li>",
+        "    <ul style='margin-left: 20px;'>",
+        "      <li><code>chr</code>: Chromosome, formatted as <code>chrN</code> (e.g., <code>chr1</code>, <code>chrX</code>, etc.).</li>",
+        "      <li><code>pos</code>: A valid numeric position on the chromosome.</li>",
+        "    </ul>",
+        "</ul><br>",
+        "<strong>Important tips:</strong><br>",
+        "<ul style='margin-left: 20px;'>",
+        "  <li>Ensure there are no unnecessary spaces before or after your input.</li>",
+        "  <li>The position must lie within the valid range for the chromosome size. You can refer to the size definitions at ",
+        "<a href='http://hgdownload.soe.ucsc.edu/goldenpath/hg38/bigZips/hg38.chrom.sizes' target='_blank'>",
+        "UCSC Genome Browser</a>.</li>",
+        "  <li>Double-check for typos or incorrect characters.</li>",
+        "</ul><br>",
+        "<strong>Your Input:</strong> <code>", chr, ":", pos, "</code><br><br>",
+        "Please correct your input and try again.<br>",
+        "</div>"
+      ),
+      type = "error"
     )
     input_pass_test(FALSE)
     return(NULL)
 
   }else{
 
+    pos <- as.numeric(pos)
     pos1 <- pos - flank
     pos2 <- pos + flank
+
+    if (pos1 < 1) {
+      pos1 = 1
+    }
+
+    if (pos2 > hg38.chrom.sizes[hg38.chrom.sizes$V1 == chr,]$V2){
+      pos2 = as.numeric(hg38.chrom.sizes[hg38.chrom.sizes$V1 == chr, ]$V2)
+    }
 
     # Query SuRE database for SNPs at the specified position
     source(file.path(DBQueryScriptsDIR, "DBquery.find.in.SuRE.r"))
@@ -67,13 +121,27 @@ if (length(query_parts[[1]]) == 2) {
 
     if (nrow(query_snps) == 0) {
       # Alert user if variant is not found in SuRE database
-      message( "Variant not in SuRE Database ❌")
+      # Inform the user through a shinyalert
       shinyalert(
-        title = "Variant not in SuRE Database",
-        type = "error",
-        text = ""
+        html = TRUE,
+        title = "Variant Not Found",
+        type = "info",
+        text = paste0(
+          "<div style='text-align: left; font-family: Arial, sans-serif; font-size: 14px;'>",
+          "Unfortunately, we couldn't locate the variant at the specified position: <strong>", chr, ":", pos, "</strong> in the SuRE database.<br><br>",
+          "But no worries! We're automatically expanding the search to include the surrounding region to help you find relevant results.<br>",
+          "</div>"
+        )
       )
-      input_pass_test(FALSE)
+      # Adjust the region to flank regions
+      pos1 <- pos - flank
+      pos2 <- pos + flank
+      pos <- NA # Set pos to NA as requested
+
+      # Continue with the adjusted region (render or other processing)
+      # You can now render everything or proceed with the region you just calculated
+      input_pass_test(TRUE)
+
       return(NULL)
     } else {
       input_pass_test(TRUE)
@@ -93,9 +161,20 @@ if (length(query_parts[[1]]) == 2) {
     # Alert user if gene is not found
     message("Either the search query is a single string but not a gene name or the gene specified is not defined in GENECODE GTF GRCh38.p14 Human Release 46 ❌")
     shinyalert(
+      html = TRUE,
       type = "error",
-      title = "Gene not found",
-      text = "Please refer to names as specified in GENECODE GTF GRCh38.p14 Human Release 46"
+      title = "Invalid Input Format",
+      text = paste0(
+        "<div style='text-align: left; font-family: Arial, sans-serif; font-size: 14px;'>",
+        "<strong>Oops! Your input appears to be in an incorrect format.</strong><br><br>",
+        "<strong>To search for a gene:</strong><br>",
+        "<ul style='margin-left: 20px;'>",
+        "  <li>Use the gene names as specified in <strong>GENCODE GTF GRCh38.p14 Human Release 46</strong>.</li>",
+        "  <li>Ensure there are no extra spaces at the beginning or end of your input.</li>",
+        "</ul><br>",
+        "Please double-check your input and try again.<br>",
+        "</div>"
+      )
     )
     input_pass_test(FALSE)
     return(NULL)
@@ -116,9 +195,20 @@ if (length(query_parts[[1]]) == 2) {
   # Alert user for invalid input format
   message( "Invalid input format.Please provide input in one of the following formats: chr:pos, or gene. ❌")
   shinyalert(
-    title = "Invalid input format",
-    text = "Please provide input in one of the following formats: chr:pos, or gene."
+    html = TRUE,
+    title = "Invalid Input Format",
+    text = paste0(
+      "<div style='text-align: left; font-family: Arial, sans-serif; font-size: 14px;'>",
+      "<strong>Invalid Input Format</strong><br><br>",
+      "Please provide your input in one of the following formats:<br>",
+      "<ul style='margin-left: 20px;'>",
+      "  <li><strong>chr:pos</strong> - Specify the chromosome and position (e.g., <code>chr12:128797635</code>).</li>",
+      "  <li><strong>gene</strong> - Provide a valid gene name.</li>",
+      "</div>"
+    ),
+    type = "error"
   )
+
   input_pass_test(FALSE)
   return(NULL)
 }
