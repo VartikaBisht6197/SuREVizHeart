@@ -6,10 +6,12 @@ A cutting-edge platform designed for exploring the functional impact of genetic 
 ---
 
 <p align="center">
-  <img src="images/Fig1.pdf" alt="Introductory Figure" width="700px">
+  <img src="images/Fig1.png" alt="Introductory Figure" width="700px">
 </p>
 
 *Figure 1: An overview of the SuREViz platform and its capabilities. Descriptions for each subfigure will be provided soon.*
+
+*Note: The original figure is in PDF format (`images/Fig1.pdf`). For proper embedding here, it has been converted to an image format.*
 
 ---
 
@@ -20,6 +22,13 @@ A cutting-edge platform designed for exploring the functional impact of genetic 
 ✨ **Custom Data Upload**: Easily compare user-provided MPRA data, BigWig, and BED files.  
 ✨ **Flexible Querying**: Search by variants (`chr:pos`), gene names, or customized regions.  
 ✨ **Downloadable Results**: Export your analyzed data in user-friendly formats.  
+
+---
+
+## 🔬 Data Sources
+
+- **Processed Data**: Available on OSF at [pyh83](https://osf.io/pyh83/).  
+- **Raw Data**: Accessible through GEO at [GSE251776](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251776).  
 
 ---
 
