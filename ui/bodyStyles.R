@@ -28,7 +28,7 @@ bodyStyles <- function() {
                 document.body.appendChild(confetti);
 
                 // Animation for confetti fall
-                const fallDuration = Math.random() * 3 + 2 + 's'; // Random fall duration between 2 and 5 seconds
+                const fallDuration = Math.random() * 5 + 2 + 's'; // Random fall duration between 2 and 5 seconds
                 const fallDelay = Math.random() * 2 + 's'; // Random delay before falling
                 confetti.style.animation = `confettiFall ${fallDuration} linear ${fallDelay} infinite`;
 
@@ -37,6 +37,36 @@ bodyStyles <- function() {
             }
         ")),
     tags$style(HTML("
+      /* Custom Styles for the Modal */
+        .modal-dialog {
+          background-color: #ffffff;
+          border-radius: 15px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+        }
+
+        .modal-content {
+          border-radius: 15px;
+          padding: 20px;
+        }
+
+        .modal-header {
+          background-color: #64BEA5; /* Primary color for consistency */
+          color: white;
+          border-bottom: none;
+          border-radius: 15px 15px 0 0; /* Rounded top corners */
+        }
+
+        .modal-body {
+          font-size: 16px;
+          color: #333;
+          text-align: center;
+        }
+
+        .modal-footer {
+          display: none; /* Hide footer to remove close button */
+        }
+
       @keyframes confettiFall {
         0% { 
           transform: translateY(-100vh) rotate(0deg);
