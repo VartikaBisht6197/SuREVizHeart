@@ -9,21 +9,21 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
         }
-
+        
         h1,
         h2 {
             color: #2c3e50;
         }
-
+        
         ul {
             list-style-type: decimal;
             padding-left: 20px;
         }
-
+        
         li {
             margin-bottom: 10px;
         }
-
+        
         .source {
             color: #2980b9;
         }
@@ -31,35 +31,27 @@
 </head>
 
 <body>
-    <p>In this tab, you'll find comprehensive details of all variants under assessment in the Impact Assessment tab. The
-        table includes the following columns:</p>
+    <p>In this tab, you'll find comprehensive details of all variants under assessment in the Impact Assessment tab. The table includes the following columns:</p>
 
     <ul>
         <li><strong>Chromosome:</strong> Indicates the chromosome where the variant is located.</li>
-        <li><strong>Position in human hg38:</strong> Specifies the genomic position of the variant according to the
-            human hg38 reference genome.</li>
-        <li><strong>Reference allele:</strong> Indicates the reference allele at the variant's position.</li>
-        <li><strong>Alternate allele:</strong> Indicates the alternate allele observed at the variant's position.</li>
+        <li><strong>Position:</strong> Specifies the genomic position of the variant according to the human hg38 reference genome.</li>
+        <li><strong>REF:</strong> Indicates the reference allele at the variant's position.</li>
+        <li><strong>ALT:</strong> Indicates the alternate allele observed at the variant's position.</li>
         <li><strong>rsID:</strong> The rsID, if available in dbSNP150, assigned to the variant.</li>
-        <li><strong>Population allele frequency gnomAD 3.1.2:</strong> Provides the allele frequency of the variant in
-            the gnomAD 3.1.2 database across various populations.</li>
-        <li><strong>Genotype in SuREXX:</strong> Indicates the genotype of the variant in each SuREXX sample (e.g.,
-            SuRE38, SuRE57, etc.).</li>
-        <li><strong>Alternate allele coverage:</strong> Specifies the coverage (number of fragments) for the alternate
-            allele.</li>
-        <li><strong>Reference allele coverage:</strong> Specifies the coverage (number of fragments) for the reference
-            allele.</li>
-        <li><strong>Reference allele mean expression:</strong> Indicates the mean expression level of the reference
-            allele across samples.</li>
-        <li><strong>Alternate allele mean expression:</strong> Indicates the mean expression level of the alternate
-            allele across samples.</li>
-        <li><strong>p-value:</strong> Indicates the p-value calculated based on the Wilcoxon rank sum test between the
-            reference and alternate alleles for each variant.</li>
+        <li><strong>Population allele frequency gnomAD 3.1.2:</strong> Provides the allele frequency of the variant in the gnomAD 3.1.2 database across various populations.</li>
+        <li><strong>Genotype in SuREXX:</strong> Indicates the genotype of the variant in each SuREXX sample (e.g., SuRE38, SuRE57, etc.).</li>
+        <li><strong>ALT allele coverage:</strong> Specifies the coverage (number of fragments) for the alternate allele.
+        </li>
+        <li><strong>REF allele coverage:</strong> Specifies the coverage (number of fragments) for the reference allele.
+        </li>
+        <li><strong>REF allele mean expression:</strong> Indicates the mean expression level of the reference allele across samples.</li>
+        <li><strong>ALT allele mean expression:</strong> Indicates the mean expression level of the alternate allele across samples.</li>
+        <li><strong>p-value:</strong> Indicates the p-value calculated based on the Wilcoxon rank sum test between the reference and alternate alleles for each variant.</li>
         <li><strong>Description:</strong> Indicates if the variant is an raQTL or not.</li>
     </ul>
 
-    <p>You can download this table using the provided download button. When a variant is selected, it will be
-        highlighted with a yellow background.</p>
+    <p>You can download this table using the provided download button. When a variant is selected, it will be highlighted with a yellow background.</p>
 
     <p>For detailed information on the calculation of these values, please refer to the cited referenced paper</a>.</p>
 </body>
