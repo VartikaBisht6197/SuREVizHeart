@@ -27,7 +27,7 @@ plot.bigwigs = function(chr, pos1 , pos2 , pos , plot.bw, bwcolor, bigwig.scale)
   names(plot.bw) = lapply(names(plot.bw), function(x) wrap_string(x,30))
 
   if(!is.na(pos) && SuREbigwig == TRUE){
-    GTs = query_snps[7:11]
+    GTs = query_snps[7:12]
     GTs = gsub(0, query_snps$REF, GTs)
     GTs = gsub(1, query_snps$ALT, GTs)
     names(plot.bw) = paste0(names(plot.bw),"\n","(", GTs, ")")
