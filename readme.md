@@ -26,7 +26,7 @@ A cutting-edge platform designed for exploring the functional impact of genetic 
 ## 🔬 Data Sources
 
 - **Processed Data**: Available on OSF at [pyh83](https://osf.io/pyh83/).  
-- **Raw Data**: Accessible through GEO at [GSE251776](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251776).  
+- **Raw Data**: Accessible through GEO at ...
 
 ---
 
