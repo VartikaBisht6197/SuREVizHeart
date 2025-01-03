@@ -21,3 +21,5 @@ sureviz_latest.sif
 images/.*
 .dockerignore
 .vscode
+run.cmd.bash
+Rmd2md.bash
