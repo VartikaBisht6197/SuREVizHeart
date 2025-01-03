@@ -11,8 +11,6 @@ A cutting-edge platform designed for exploring the functional impact of genetic 
 
 *Figure 1: An overview of the SuREViz platform and its capabilities. Descriptions for each subfigure will be provided soon.*
 
-*Note: The original figure is in PDF format (`images/Intro.png`). For proper embedding here, it has been converted to an image format.*
-
 ---
 
 ## 🌟 Key Features
