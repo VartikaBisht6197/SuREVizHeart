@@ -19,3 +19,4 @@ Rplots.pdf
 sureviz_latest.sif
 ._app
 images/.*
+.dockerignore
