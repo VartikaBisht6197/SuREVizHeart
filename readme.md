@@ -6,12 +6,12 @@ A cutting-edge platform designed for exploring the functional impact of genetic 
 ---
 
 <p align="center">
-  <img src="images/Into.png" alt="Introductory Figure" width="700px">
+  <img src="images/Intro.png" alt="Introductory Figure" width="700px">
 </p>
 
 *Figure 1: An overview of the SuREViz platform and its capabilities. Descriptions for each subfigure will be provided soon.*
 
-*Note: The original figure is in PDF format (`images/Into.png`). For proper embedding here, it has been converted to an image format.*
+*Note: The original figure is in PDF format (`images/Intro.png`). For proper embedding here, it has been converted to an image format.*
 
 ---
 
