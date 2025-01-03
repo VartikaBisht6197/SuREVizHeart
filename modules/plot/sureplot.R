@@ -122,13 +122,16 @@ suredata <- suREVizMainQuery(chr, pos1, pos2, dbSQL)
 
 if (nrow(suredata) == 0) {
   # Create an empty Plotly plot if no data is found
-  snp.plot <- ggplot() +
-    geom_line(aes(x = c(pos1, pos1), y = c(0, 1)), linetype = "dashed") +
+  static.snp.plot <- ggplot() +
+    geom_line(
+      aes(x = c(pos1, pos2), y = c(0, 1)),
+      linetype = "dashed", color = "transparent"
+    ) +
     labs(fill = "") +
     xlab("") +
     ylab("SuRE Signal") +
     guides(color = FALSE) +
-    coord_cartesian(xlim = c(pos1, pos1)) +
+    coord_cartesian(xlim = c(pos1, pos2)) +
     theme_bw() +
     theme(
       axis.text.x = element_blank(),
@@ -136,12 +139,18 @@ if (nrow(suredata) == 0) {
       axis.title.x = element_blank(),
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank()
+    ) +
+    annotate(
+      "text",
+      x = mean(c(pos1, pos2)), y = 0.5,
+      label = "No data available to plot",
+      size = 5, hjust = 0.5, vjust = 0.5
     )
   # Add the SNP position if specified
   if (!is.na(pos)) {
-    snp.plot <- snp.plot + geom_vline(xintercept = pos, colour = "black", linetype = "dashed")
+    static.snp.plot <- static.snp.plot + geom_vline(xintercept = pos, colour = "black", linetype = "dashed")
   }
-  snp.plot <- ggplotly(snp.plot)
+  snp.plot <- ggplotly(static.snp.plot)
 } else {
   # Generate and convert ggplot object to Plotly interactive plot
   static.snp.plot <- snps_plot(chr, pos1, pos2, pos, suredata, pvalcutoff, SureSignalcutoff, query_snps)
