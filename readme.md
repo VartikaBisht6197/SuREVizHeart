@@ -17,7 +17,7 @@ An R shiny platform designed for exploring the functional impact of genetic vari
 ✨ **Interactive Visualization**: Explore over 4.7 million variants categorized into raQTLs and non-raQTLs.  
 ✨ **Genomic Data Integration**: Combines functional, genomic, and clinical datasets for enriched insights.  
 ✨ **Custom Data Upload**: Easily compare user-provided MPRA data, BigWig, and BED files.  
-✨ **Flexible Querying**: Search by variants (`chr:pos`) or gene name. 
+✨ **Flexible Querying**: Search by variants (`chr:pos`) or gene name.  
 ✨ **Downloadable Results**: Export your analyzed data in user-friendly formats.  
 
 ---
