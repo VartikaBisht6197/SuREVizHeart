@@ -34,9 +34,20 @@
 
 # Render combined Plotly plot for SNP and gene visualizations
 output$plotTab1 <- renderPlotly({
-  # Combine SNP plot and gene plotly into a subplot
-  p <- subplot(style(snp.plot,showlegend = F), style(gene.plotly,showlegend = F), nrows = 2, heights = c(0.8, 0.2), shareX = TRUE) %>%
-    layout(xaxis = list(autorange = FALSE, range = c(pos1, pos2)))
+   p <- subplot(
+          style(snp.plot %>%
+                config(
+                  displayModeBar = TRUE, # Show the modebar
+                  modeBarButtons = list(list("resetViews"), list("toImage"))
+                ), showlegend = FALSE),
+          style(gene.plotly %>%
+                config(
+                  displayModeBar = TRUE, # Show the modebar
+                 modeBarButtons = list( list("resetViews"), list("toImage"))
+                ), showlegend = FALSE),
+          nrows = 2, heights = c(0.8, 0.2), shareX = TRUE
+        ) %>%
+       layout(xaxis = list(autorange = FALSE, range = c(pos1, pos2)))
   # Register the plotly_click event for interactivity
   event_register(p, "plotly_click")
 })
@@ -141,10 +152,6 @@ output$gnomad <- renderUI({
 
 # Output SNP information table with optional row highlighting
 output$tableTab3 <- renderText({
-  if (nrow(suredata) == 0) {
-    showNotification("Data not found")
-    return("Data not found") # Return a message if data is not available
-  }
 
   if (!is.na(highlight)) {
     (SNP.info) %>%
