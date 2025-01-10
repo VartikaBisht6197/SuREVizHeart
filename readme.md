@@ -1,6 +1,6 @@
-# SuREViz: A Web-Based SuRE MPRA Data Exploration Tool
+# CardiacSuREViz: A Web-Based SuRE MPRA Data Exploration Tool
 
-An R shiny platform designed for exploring the functional impact of genetic variants assessed by the SuRE (Survey of Regulatory Elements) massively parallel reporter assay. SuREViz empowers researchers and data enthusiasts with interactive tools to visualize the interplay between genomic variants and gene regulation to predict genetic consequences variants.
+An R shiny platform designed for exploring the functional impact of genetic variants assessed by the SuRE (Survey of Regulatory Elements) massively parallel reporter assay. CardiacSuREViz empowers researchers and data enthusiasts with interactive tools to visualize the interplay between genomic variants and gene regulation to predict genetic consequences variants.
 
 ---
 
@@ -23,7 +23,7 @@ An R shiny platform designed for exploring the functional impact of genetic vari
 
 ## 🔬 What is SuRE?
 
-SuRE (Survey of Regulatory Elements) is a high-throughput assay used to study gene regulation. It maps allele-specific expression back to the genome, allowing researchers to assess changes in regulatory activity upon the introduction of SNPs and InDels. The current SuREViz application showcases data from heart-related studies, including six complex plasmid libraries representing 4.7 million variants.  
+SuRE (Survey of Regulatory Elements) is a high-throughput assay used to study gene regulation. It maps allele-specific expression back to the genome, allowing researchers to assess changes in regulatory activity upon the introduction of SNPs and InDels. The current CardiacSuREViz application showcases data from heart-related studies, including six complex plasmid libraries representing 4.7 million variants.  
 
 ### 🧬 What are raQTLs?  
 **Reporter Assay Quantitative Trait Loci (raQTLs)** are variants showing significant differences in expression between reference and alternate alleles, highlighting the regulatory impact of variants. Refer to [High-throughput identification of human SNPs affecting regulatory element activity](https://doi-org.utrechtuniversity.idm.oclc.org/10.1038/s41588-019-0455-2) for a detailed explanation.
@@ -32,8 +32,8 @@ SuRE (Survey of Regulatory Elements) is a high-throughput assay used to study ge
 
 ## 🚀 Getting Started
 
-To begin your journey with SuREViz:  
-1. Access the platform here: **[SuREViz](http://192.168.107.99:6197)**  
+To begin your journey with CardiacSuREViz:  
+1. Access the platform here: **[CardiacSuREViz](http://192.168.107.99:6197)**  
 2. Liftover your queries to hg38 genome assembly before using the application. 
 
 ---
@@ -42,7 +42,7 @@ To begin your journey with SuREViz:
 ## 🎓 Tutorial
 
 Get started quickly with our detailed step-by-step tutorial:  
-👉 **[SuREViz Tutorial](https://vartikabisht6197.github.io/SuREViz/SuREVizTutorial.html)** 👈  
+👉 **[CardiacSuREViz Tutorial](https://vartikabisht6197.github.io/CardiacSuREViz/CardiacSuREVizTutorial.html)** 👈  
 
 ---
 
@@ -54,5 +54,5 @@ We ❤️ contributions!
 
 ---
 
-### 🌟 Thank You for Exploring SuREViz!  
+### 🌟 Thank You for Exploring CardiacSuREViz!  
 Together, let’s uncover the regulatory mechanisms behind genetic variants. 🌍✨
