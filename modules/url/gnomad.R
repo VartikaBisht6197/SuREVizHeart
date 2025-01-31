@@ -17,11 +17,11 @@ if(!is.na(pos)){
   } else {
     message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "gnomAD URL View : Variant not found in gnomAD database. ⚠️"))
     # Point to the local HTML file
-    gnomad_complete_url <- file.path(dataDIR, "not_in_gnomAD.html")
+    gnomad_complete_url <- file.path(appDIR, "www", "not_in_gnomAD.html")
   }
 } else {
     message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "gnomAD URL View : No variant selected. ⚠️"))
     # Point to the local HTML file
-    gnomad_complete_url <- file.path(dataDIR, "variant_view_false.html")
+    gnomad_complete_url <- file.path(appDIR, "www", "variant_view_false.html")
     
   }
