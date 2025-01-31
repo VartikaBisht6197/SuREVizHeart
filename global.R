@@ -68,22 +68,22 @@ DBQueryScriptsDIR <- file.path(appDIR, "modules" ,"query")
 
 # Define lists of bigwig files for different patients
 bigwigs <- list(
-  "SuREX38" = file.path(dataDIR, "data", "SuREX38.bw"),
-  "SuREX57" = file.path(dataDIR, "data", "SuREX57.bw"),
-  "SuREX59" = file.path(dataDIR, "data", "SuREX59.bw"),
-  "SuREX67" = file.path(dataDIR, "data", "SuREX67.bw"),
-  "SuREX68" = file.path(dataDIR, "data", "SuREX68.bw"),
-  "SuREX86" = file.path(dataDIR, "data", "SuREX86.bw")
+  "SuREX38" = file.path(dataDIR, "SuREX38.bw"),
+  "SuREX57" = file.path(dataDIR, "SuREX57.bw"),
+  "SuREX59" = file.path(dataDIR, "SuREX59.bw"),
+  "SuREX67" = file.path(dataDIR, "SuREX67.bw"),
+  "SuREX68" = file.path(dataDIR, "SuREX68.bw"),
+  "SuREX86" = file.path(dataDIR, "SuREX86.bw")
 )
 
 # Define list of ATAC-seq data files
 AC16ATACbw <- list(
-  "AC16\nATAC" = file.path(dataDIR, "data", "AC16.ATACseq.hg38.bw")
+  "AC16\nATAC" = file.path(dataDIR, "AC16.ATACseq.hg38.bw")
 )
 
 # Define hg38 PhastCons 30 way conservation track
 Consbw <- list(
-  "Conservation\nPhastCons 30 way" = file.path(dataDIR, "data", "hg38.phastCons30way.bw")
+  "Conservation\nPhastCons 30 way" = file.path(dataDIR, "hg38.phastCons30way.bw")
 )
 
 # Utility functions
