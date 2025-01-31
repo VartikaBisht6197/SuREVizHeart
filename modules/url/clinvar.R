@@ -19,11 +19,11 @@ clin_complete_url <- NA
     } else {
       message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "ClinVar URL View : Variant not found in clinvar database. ⚠️"))
       # Point to the local HTML file
-      clin_complete_url <- file.path(dataDIR, "not_in_clinvar.html")
+      clin_complete_url <- file.path(appDIR, "www", "not_in_clinvar.html")
     }
   } else {
     message(paste(format(Sys.time(), "%d/%m/%Y %H:%M:%S"), ":", "ClinVar URL View : No variant selected. ⚠️"))
     # Point to the local HTML file
-    clin_complete_url <- file.path(dataDIR, "variant_view_false.html")
+    clin_complete_url <- file.path(appDIR, "www", "variant_view_false.html")
     
   }
