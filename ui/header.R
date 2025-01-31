@@ -19,7 +19,7 @@ header <- function() {
                 style = "margin-right: 10px;" # Inline style for right margin to space out the logo from text
             ),
             span(
-                "SuRE Visualization", # Application title text
+                "SuREVizHeart", # Application title text
                 style = "color: black;" # Inline style to set text color to black
             )
         ),
