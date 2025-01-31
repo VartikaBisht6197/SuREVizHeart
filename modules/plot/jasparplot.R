@@ -188,7 +188,7 @@ if (!is.na(pos) && nrow(suredata) != 0) {
 
     if (nrow(jaspar.data) == 1 & (jaspar.data$CHROM == chr & jaspar.data$POS == pos & jaspar.data$REF == query_snps$REF & jaspar.data$ALT == query_snps$ALT)) {
       # Load JASPAR PPM data
-      JASPAR.PPM <- read_meme(file.path(dataDIR, "data", "JASPAR2022_CORE_vertebrates_non-redundant_v2.meme"))
+      JASPAR.PPM <- read_meme(file.path(dataDIR, "JASPAR2022_CORE_vertebrates_non-redundant_v2.meme"))
       names(JASPAR.PPM) <- unlist(lapply(JASPAR.PPM, function(x) x@name))
 
       # Run the JASPAR analysis
