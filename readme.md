@@ -43,15 +43,4 @@ To begin your journey with SuREVizHeart:
 Get started quickly with our detailed step-by-step tutorial:  
 👉 **[SuREVizHeart Tutorial](https://vartikabisht6197.github.io/SuREVizHeart/SuREVizHeartTutorial.html)** 👈  
 
----
 
-## 🤝 Contributing and Support  
-
-We ❤️ contributions!  
-- Found a bug? Open an **issue**.  
-- Questions? Contact **reachout.vartika@gmail.com** for direct support.
-
----
-
-### 🌟 Thank You for Exploring SuREVizHeart!  
-Together, let’s uncover the regulatory mechanisms behind genetic variants. 🌍✨
