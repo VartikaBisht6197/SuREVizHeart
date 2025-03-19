@@ -17,7 +17,6 @@ An R shiny platform designed for exploring the functional impact of genetic vari
 ## 🔬 Data Sources
 
 - **Processed Data**: Available on OSF at [pyh83](https://osf.io/pyh83/).  
-- **Raw Data**: Accessible through GEO at ...  
 
 ---
 
@@ -26,7 +25,7 @@ An R shiny platform designed for exploring the functional impact of genetic vari
 SuRE (Survey of Regulatory Elements) is a high-throughput assay used to study gene regulation. It maps allele-specific expression back to the genome, allowing researchers to assess changes in regulatory activity upon the introduction of SNPs and InDels. The current SuREVizHeart application showcases data from heart-related studies, including six complex plasmid libraries representing 4.7 million variants.  
 
 ### 🧬 What are raQTLs?  
-**Reporter Assay Quantitative Trait Loci (raQTLs)** are variants showing significant differences in expression between reference and alternate alleles, highlighting the regulatory impact of variants. Refer to [High-throughput identification of human SNPs affecting regulatory element activity](https://doi-org.utrechtuniversity.idm.oclc.org/10.1038/s41588-019-0455-2) for a detailed explanation.
+**Reporter Assay Quantitative Trait Loci (raQTLs)** are variants showing significant differences in expression between reference and alternate alleles, highlighting the regulatory impact of variants. Refer to [High-throughput identification of human SNPs affecting regulatory element activity](https://doi.org/10.1038/s41588-019-0455-2) for a detailed explanation.
 
 ---
 
@@ -42,7 +41,7 @@ To begin your journey with SuREVizHeart:
 ## 🎓 Tutorial
 
 Get started quickly with our detailed step-by-step tutorial:  
-👉 **[SuREVizHeart Tutorial](https://vartikabisht6197.github.io/SuREVizHeart/CardiacSuREVizTutorial.html)** 👈  
+👉 **[SuREVizHeart Tutorial](https://vartikabisht6197.github.io/SuREVizHeart/SuREVizHeartTutorial.html)** 👈  
 
 ---
 
