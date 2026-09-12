@@ -6,7 +6,11 @@ FROM mambaorg/micromamba:0.25.0
 WORKDIR /shiny-server
 
 # Create the mamba environment and install packages
-RUN micromamba create -n sureviz -c conda-forge -c bioconda \
+RUN micromamba create -n sureviz \
+    --override-channels \
+    --strict-channel-priority \
+    -c conda-forge \
+    -c bioconda \
     r-base r-data.table r-dbi r-dt r-formattable r-ggplot2 r-ggseqlogo \
     bioconductor-genomicranges r-gridextra r-here r-kableextra bioconductor-memes r-optparse \
     r-patchwork r-pheatmap r-plotly r-rcolorbrewer r-rsqlite r-signac \
